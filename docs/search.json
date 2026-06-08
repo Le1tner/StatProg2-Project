@@ -1,0 +1,114 @@
+[
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Project Proposal",
+    "section": "",
+    "text": "Source: https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students\nLicence: CC0: Public Domain Official licencing description: “You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.”\nDescription: First of all, it is important to note that this is a synthetic dataset, so we won’t be able to draw any real-world conclusions from our analysis. The dataset explores the impact, extent, and results of AI usage on students across many indicators such as student major, whether they have a paid subscription or not, pre- and post-semester GPA, and skill retention. Overall, this dataset includes data about 50,000 students across 15 indicators.\nResearch Questions\n\nDoes a paid subscription impact the improvement (or decline) of a student’s GPA?\nNeeded columns: Post_Semester_GPA, Pre_Semester_GPA (difference), Paid_Subscription\nThis question is explanatory but not causal. A possible improvement could have many reasons, such as higher dedication to studying among paying students.\nWhich majors’ average GPA is most positively and negatively influenced by AI usage? And is this effect related to the fraction of time spent studying with AI compared to studying without AI?\nNeeded columns: Major_Category, Post_Semester_GPA, Pre_Semester_GPA, Weekly_GenAI_Hours, Traditional_Study_Hours\nThis question is explanatory but not causal. Differences between majors could also be caused by other factors, such as exam formats."
+  },
+  {
+    "objectID": "proposal.html#dataset",
+    "href": "proposal.html#dataset",
+    "title": "Project Proposal",
+    "section": "",
+    "text": "Source: https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students\nLicence: CC0: Public Domain Official licencing description: “You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.”\nDescription: First of all, it is important to note that this is a synthetic dataset, so we won’t be able to draw any real-world conclusions from our analysis. The dataset explores the impact, extent, and results of AI usage on students across many indicators such as student major, whether they have a paid subscription or not, pre- and post-semester GPA, and skill retention. Overall, this dataset includes data about 50,000 students across 15 indicators.\nResearch Questions\n\nDoes a paid subscription impact the improvement (or decline) of a student’s GPA?\nNeeded columns: Post_Semester_GPA, Pre_Semester_GPA (difference), Paid_Subscription\nThis question is explanatory but not causal. A possible improvement could have many reasons, such as higher dedication to studying among paying students.\nWhich majors’ average GPA is most positively and negatively influenced by AI usage? And is this effect related to the fraction of time spent studying with AI compared to studying without AI?\nNeeded columns: Major_Category, Post_Semester_GPA, Pre_Semester_GPA, Weekly_GenAI_Hours, Traditional_Study_Hours\nThis question is explanatory but not causal. Differences between majors could also be caused by other factors, such as exam formats."
+  },
+  {
+    "objectID": "proposal.html#section",
+    "href": "proposal.html#section",
+    "title": "Project Proposal",
+    "section": "",
+    "text": "Research Questions\n\nDoes a paid subscription impact the improvement (or decline) of a student’s GPA?\nNeeded columns: Post_Semester_GPA, Pre_Semester_GPA (difference), Paid_Subscription\nThis question is explanatory but not causal. A possible improvement could have many reasons, such as higher dedication to studying among paying students.\nWhich majors’ average GPA is most positively and negatively influenced by AI usage? And is this effect related to the fraction of time spent studying with AI compared to studying without AI?\nNeeded columns: Major_Category, Post_Semester_GPA, Pre_Semester_GPA, Weekly_GenAI_Hours, Traditional_Study_Hours\nThis question is explanatory but not causal. Differences between majors could also be caused by other factors, such as exam formats."
+  },
+  {
+    "objectID": "proposal.html#context-and-target-audience",
+    "href": "proposal.html#context-and-target-audience",
+    "title": "Project Proposal",
+    "section": "Context and target audience",
+    "text": "Context and target audience\nDue to this dataset being synthetic, the results have no real-world relevance. However, the same analytical approach could still be useful if applied to a real dataset, where the results might be of interest in both academic and private contexts.\nThe analysis could be relevant in both an academic and private context. In an academic context, it would be interesting to identify possible reasons behind correlations. For students, it could be beneficial to see trends in their own field of study in order to understand whether AI is more likely to be associated with positive or negative differences in academic performance. A short summary with the possibility of a deeper dive would therefore be the best presentation format to satisfy both target audiences."
+  },
+  {
+    "objectID": "proposal.html#load-data",
+    "href": "proposal.html#load-data",
+    "title": "Project Proposal",
+    "section": "Load Data",
+    "text": "Load Data\n\n\nCode\nlibrary(tidyverse)\n\n\nWarning: package 'ggplot2' was built under R version 4.5.2\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.1     ✔ stringr   1.5.2\n✔ ggplot2   4.0.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(here)\n\n\nhere() starts at /Users/leitneros/Documents/R/StatProg2-Project\n\n\nCode\ndata_raw &lt;- read_csv(here(\"data\", \"raw\", \"ai_student_impact.csv\"))\n\n\nRows: 50000 Columns: 16\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (6): Major_Category, Year_of_Study, Primary_Use_Case, Prompt_Engineering...\ndbl (9): Student_ID, Pre_Semester_GPA, Weekly_GenAI_Hours, Tool_Diversity, T...\nlgl (1): Paid_Subscription\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
+  },
+  {
+    "objectID": "proposal.html#data-screening",
+    "href": "proposal.html#data-screening",
+    "title": "Project Proposal",
+    "section": "Data screening",
+    "text": "Data screening\n\n\nCode\nlibrary(tidyverse)\nlibrary(here)\nlibrary(visdat)\n\nglimpse(data_raw)\n\n\nRows: 50,000\nColumns: 16\n$ Student_ID                 &lt;dbl&gt; 100001, 100002, 100003, 100004, 100005, 100…\n$ Major_Category             &lt;chr&gt; \"Humanities\", \"Medical\", \"Business\", \"Busin…\n$ Year_of_Study              &lt;chr&gt; \"Senior\", \"Junior\", \"Freshman\", \"Senior\", \"…\n$ Pre_Semester_GPA           &lt;dbl&gt; 2.418, 3.821, 3.398, 3.789, 3.635, 3.449, 3…\n$ Weekly_GenAI_Hours         &lt;dbl&gt; 23.31, 1.12, 21.26, 1.82, 9.29, 6.50, 31.41…\n$ Primary_Use_Case           &lt;chr&gt; \"Copywriting/Drafting\", \"Ideation\", \"Summar…\n$ Prompt_Engineering_Skill   &lt;chr&gt; \"Beginner\", \"Advanced\", \"Beginner\", \"Interm…\n$ Tool_Diversity             &lt;dbl&gt; 1, 5, 2, 4, 4, 1, 5, 3, 2, 2, 3, 3, 2, 1, 1…\n$ Paid_Subscription          &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, TR…\n$ Traditional_Study_Hours    &lt;dbl&gt; 8.13, 16.65, 10.35, 15.23, 12.55, 14.19, 13…\n$ Perceived_AI_Dependency    &lt;dbl&gt; 5, 3, 5, 2, 4, 4, 8, 2, 1, 3, 5, 3, 2, 2, 2…\n$ Institutional_Policy       &lt;chr&gt; \"Allowed_With_Citation\", \"Allowed_With_Cita…\n$ Anxiety_Level_During_Exams &lt;dbl&gt; 6, 9, 9, 2, 4, 5, 7, 1, 5, 8, 3, 3, 4, 3, 4…\n$ Post_Semester_GPA          &lt;dbl&gt; 2.393, 3.696, 3.499, 4.000, 3.798, 3.666, 4…\n$ Skill_Retention_Score      &lt;dbl&gt; 86.44, 69.39, 73.93, 63.58, 100.00, 65.92, …\n$ Burnout_Risk_Level         &lt;chr&gt; \"High\", \"Low\", \"Medium\", \"Medium\", \"Medium\"…\n\n\nCode\nvis_dat(data_raw)"
+  },
+  {
+    "objectID": "proposal.html#ida",
+    "href": "proposal.html#ida",
+    "title": "Project Proposal",
+    "section": "IDA",
+    "text": "IDA\n\n\nCode\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "proposal.html#analysis-plan",
+    "href": "proposal.html#analysis-plan",
+    "title": "Project Proposal",
+    "section": "Analysis Plan",
+    "text": "Analysis Plan\n\nWhich variables will you use?\nAs mentioned before: Post_Semester_GPA, Pre_Semester_GPA, Paid_Subscription, Major_Category, Weekly_GenAI_Hours, Traditional_Study_Hours\nWhat analytical approach or method seems appropriate, and why?\n\nA boxplot of the GPA difference (Post_Semester_GPA - Pre_Semester_GPA) for students with and without a paid subscription could provide a useful overview. A linear regression model (GPA Difference ~ Paid_Subscription) could be used for further investigation.\nA boxplot of the GPA difference for each major could help answer the first part of the question by comparing average performance changes across majors. For the second part, a multiple linear regression model such as GPA Difference ~ Major_Category + AI_Study_Fraction (Weekly_GenAI_Hours / Traditional_Study_Hours) could be appropriate.\n\nWhat cleaning or transformation steps do you anticipate needing?\nSome columns need to be transformed into (ordered) factors, as already done in the practical. In addition, a GPA difference variable (Post_Semester_GPA - Pre_Semester_GPA) and an AI study fraction variable (Weekly_GenAI_Hours/ Traditional_Study_Hours) will likely be needed. Standard data analysis steps such as grouping, summarising and plotting will also be required.\nWhat are the main uncertainties or risks (e.g. not enough data, confounding variables, missing values)?\nUnclear or useless results due to the dataset being synthetic."
+  },
+  {
+    "objectID": "CONTRIBUTING.html",
+    "href": "CONTRIBUTING.html",
+    "title": "Contributions",
+    "section": "",
+    "text": "[Name] — [files/sections responsible for] - [Key task 1] - [Key task 2] - [Collaborative tasks]\n[Name] — [files/sections responsible for] - [Key task 1] - [Key task 2] - [Collaborative tasks]\n[Name] — [files/sections responsible for] - [Key task 1] - [Key task 2] - [Collaborative tasks]\n\n\n\n\nWe used the following AI tools in this project:\n\n\n\nTool\nPurpose\nScope\n\n\n\n\n\n\n\n\n\n\nAll AI-generated code and text was reviewed and verified by a group member before inclusion."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#group-members",
+    "href": "CONTRIBUTING.html#group-members",
+    "title": "Contributions",
+    "section": "",
+    "text": "[Name] — [files/sections responsible for] - [Key task 1] - [Key task 2] - [Collaborative tasks]\n[Name] — [files/sections responsible for] - [Key task 1] - [Key task 2] - [Collaborative tasks]\n[Name] — [files/sections responsible for] - [Key task 1] - [Key task 2] - [Collaborative tasks]"
+  },
+  {
+    "objectID": "CONTRIBUTING.html#ai-tool-disclosure",
+    "href": "CONTRIBUTING.html#ai-tool-disclosure",
+    "title": "Contributions",
+    "section": "",
+    "text": "We used the following AI tools in this project:\n\n\n\nTool\nPurpose\nScope\n\n\n\n\n\n\n\n\n\n\nAll AI-generated code and text was reviewed and verified by a group member before inclusion."
+  },
+  {
+    "objectID": "proposal.html#initial-data-analysis",
+    "href": "proposal.html#initial-data-analysis",
+    "title": "Project Proposal",
+    "section": "Initial data analysis",
+    "text": "Initial data analysis\n\n\nRows: 50,000\nColumns: 16\n$ Student_ID                 &lt;dbl&gt; 100001, 100002, 100003, 100004, 100005, 100…\n$ Major_Category             &lt;chr&gt; \"Humanities\", \"Medical\", \"Business\", \"Busin…\n$ Year_of_Study              &lt;chr&gt; \"Senior\", \"Junior\", \"Freshman\", \"Senior\", \"…\n$ Pre_Semester_GPA           &lt;dbl&gt; 2.418, 3.821, 3.398, 3.789, 3.635, 3.449, 3…\n$ Weekly_GenAI_Hours         &lt;dbl&gt; 23.31, 1.12, 21.26, 1.82, 9.29, 6.50, 31.41…\n$ Primary_Use_Case           &lt;chr&gt; \"Copywriting/Drafting\", \"Ideation\", \"Summar…\n$ Prompt_Engineering_Skill   &lt;chr&gt; \"Beginner\", \"Advanced\", \"Beginner\", \"Interm…\n$ Tool_Diversity             &lt;dbl&gt; 1, 5, 2, 4, 4, 1, 5, 3, 2, 2, 3, 3, 2, 1, 1…\n$ Paid_Subscription          &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, TR…\n$ Traditional_Study_Hours    &lt;dbl&gt; 8.13, 16.65, 10.35, 15.23, 12.55, 14.19, 13…\n$ Perceived_AI_Dependency    &lt;dbl&gt; 5, 3, 5, 2, 4, 4, 8, 2, 1, 3, 5, 3, 2, 2, 2…\n$ Institutional_Policy       &lt;chr&gt; \"Allowed_With_Citation\", \"Allowed_With_Cita…\n$ Anxiety_Level_During_Exams &lt;dbl&gt; 6, 9, 9, 2, 4, 5, 7, 1, 5, 8, 3, 3, 4, 3, 4…\n$ Post_Semester_GPA          &lt;dbl&gt; 2.393, 3.696, 3.499, 4.000, 3.798, 3.666, 4…\n$ Skill_Retention_Score      &lt;dbl&gt; 86.44, 69.39, 73.93, 63.58, 100.00, 65.92, …\n$ Burnout_Risk_Level         &lt;chr&gt; \"High\", \"Low\", \"Medium\", \"Medium\", \"Medium\"…\n\n\n\n\nCode\ndata_raw %&gt;%\n  dplyr::select(Post_Semester_GPA, Pre_Semester_GPA, Paid_Subscription, Major_Category, Weekly_GenAI_Hours, Traditional_Study_Hours) %&gt;%\n  summary()\n\n\n Post_Semester_GPA Pre_Semester_GPA Paid_Subscription Major_Category    \n Min.   :1.000     Min.   :1.183    Mode :logical     Length:50000      \n 1st Qu.:3.024     1st Qu.:2.834    FALSE:28846       Class :character  \n Median :3.421     Median :3.210    TRUE :21154       Mode  :character  \n Mean   :3.349     Mean   :3.146                                        \n 3rd Qu.:3.749     3rd Qu.:3.521                                        \n Max.   :4.000     Max.   :3.998                                        \n Weekly_GenAI_Hours Traditional_Study_Hours\n Min.   : 0.000     Min.   : 1.00          \n 1st Qu.: 2.390     1st Qu.: 7.56          \n Median : 5.800     Median :11.18          \n Mean   : 8.428     Mean   :11.21          \n 3rd Qu.:11.720     3rd Qu.:14.71          \n Max.   :40.000     Max.   :35.86          \n\n\nPlot 1 — Distribution of the outcome variable:\n\n\nCode\ndata_raw %&gt;%\n  ggplot(aes(x = Post_Semester_GPA)) +\n  geom_histogram(bins = 30) +\n  labs(\n    title = \"Distribution of Post-Semester GPA\",\n    x = \"Post-Semester GPA\",\n    y = \"Count\"\n  )\n\n\n\n\n\n\n\n\n\nPlot 2 — Relationship or trend relevant to a research question:\n\n\nCode\ndata_raw %&gt;%\n  filter(Major_Category == \"STEM\") %&gt;%\n  slice_sample(n = 1000) %&gt;%\n  ggplot(aes(x = Weekly_GenAI_Hours, y = Post_Semester_GPA)) +\n  geom_point(alpha = 0.6) +\n  labs(\n    title = \"Relationship between Post-Semester GPA and Hours Spent Studying with AI\",\n    x = \"Weekly GenAI Hours\",\n    y = \"Post-Semester GPA\",\n  )\n\n\n\n\n\n\n\n\n\nData quality issues:\n\nSynthetic dataset → no real-world conclusions can be drawn. Creating a package with the functions used for the analysis would be useful if a real dataset with similar indicators becomes available in the future.\nAt first glance, all indicators seem to be reasonably generated, with the exception of Post_Semester_GPA. As shown in the plot, there are too many top GPAs, so additional filtering may be required."
+  },
+  {
+    "objectID": "proposal.html#workflow-organisation",
+    "href": "proposal.html#workflow-organisation",
+    "title": "Project Proposal",
+    "section": "Workflow organisation",
+    "text": "Workflow organisation\n\nCode style: We will follow the coding style taught in StatProg1 and StatProg2, including the use of the tidyverse style with piping (%&gt;%), the here package for file paths, and other conventions. We will enforce this using a code_style.md file, which documents used packages and coding style conventions.\nPackages: tidyverse, janitor, here, …\nGit workflow: There will always be at least two branches to avoid conflicts within the group. This, together with a clear separation of tasks, should help to prevent merge conflicts. We will also work on separate .qmd files, which will later be combined into a final document using the include command for additional modularity.\n.gitignore: \n.Rhistory .RData .Rproj.user/\n/.quarto/ _site/\n.DS_Store Thumbs.db\n**/*.quarto_ipynb\n…"
+  },
+  {
+    "objectID": "index.html#data",
+    "href": "index.html#data",
+    "title": "Project Title",
+    "section": "Data",
+    "text": "Data"
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "Project Title",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "index.html#discussion",
+    "href": "index.html#discussion",
+    "title": "Project Title",
+    "section": "Discussion",
+    "text": "Discussion"
+  }
+]

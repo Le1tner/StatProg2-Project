@@ -4,26 +4,27 @@
 
 ## Research Questions
 
-1. <!-- Your first research question -->
-2. <!-- Your second research question -->
+1.  <!-- Your first research question -->
+
+2.  <!-- Your second research question -->
 
 ## Dataset
 
-- **Source:** <!-- URL or citation -->
-- **Licence:** <!-- e.g. CC BY 4.0 -->
-- **Description:** <!-- What does the data contain? What are the key variables? -->
+-   **Source:** <!-- URL or citation -->
+-   **Licence:** [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
+-   **Description:** <!-- What does the data contain? What are the key variables? -->
 
 ## Group Members
 
 | Name | GitHub username |
-|------|----------------|
-|      |                |
-|      |                |
-|      |                |
+|------|-----------------|
+|      |                 |
+|      |                 |
+|      |                 |
 
 ## Repository Structure
 
-```
+```         
 data/raw/        read-only raw data and licence documentation
 data/processed/  cleaned data produced by code/02_clean.R
 code/            numbered R scripts (01 download → 02 clean → 03 EDA → 04 analysis)
@@ -34,7 +35,7 @@ report.qmd       final analysis report
 
 ## How to reproduce
 
-```r
+``` r
 # 1. Install dependencies
 renv::restore()   # if using renv, otherwise install packages manually
 
