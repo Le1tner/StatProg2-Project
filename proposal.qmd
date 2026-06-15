@@ -8,7 +8,7 @@ date: today
 
 ## **Dataset**
 
-**Source:** [https://data-explorer.oecd.org/vis?lc=en&tm=ICT&pg=0&snb=69&df\[ds\]=dsDisseminateFinalDMZ&df\[id\]=DSD_ICT_HH_IND%40DF_IND&df\[ag\]=OECD.STI.DEP&df\[vs\]=1.1&dq=.A........&pd=,&to\[TIME_PERIOD\]=false](https://data-explorer.oecd.org/vis?lc=en&tm=ICT&pg=0&snb=69&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_ICT_HH_IND%40DF_IND&df[ag]=OECD.STI.DEP&df[vs]=1.1&dq=.A........&pd=,&to[TIME_PERIOD]=false)
+**Source:** <https://data-explorer.oecd.org/vis?lc=en&tm=ICT&pg=0&snb=69&df%5Bds%5D=dsDisseminateFinalDMZ&df%5Bid%5D=DSD_ICT_HH_IND%40DF_IND&df%5Bag%5D=OECD.STI.DEP&df%5Bvs%5D=1.1&dq=.A........&pd=,&to%5BTIME_PERIOD%5D=false>
 
 **Licence:** OECD Terms & Conditions (Data – Section 3) “…you can extract from, download, copy, adapt, print, distribute, share and embed Data for any purpose, even for commercial use. You must give appropriate credit to the OECD…”
 
@@ -28,7 +28,7 @@ For this proposal, the following filters will be applied:
 
 -   Education level: Low, medium, and high educational attainment
 
-This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population.
+This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population. It can be found in `data/raw` and is called: `ICT_dataset_q1.csv`. It will also be used to answer the Research Question 1 (q1).
 
 **Research Questions**
 
@@ -38,7 +38,7 @@ This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represent
 
     This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.
 
-2.  
+2.  \<DEAN\>
 
 3.  
 
@@ -112,11 +112,13 @@ data_raw %>%
 
 -   *Which variables will you use?*
 
-    -    Question 1: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA
+    -   Question 1: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA
+    -   \<DEAN\>
 
 -   *What analytical approach or method seems appropriate, and why?*
 
     -   Question 1: First of all, we would use a boxplot to get a first insight into the relationship between education level and daily or almost daily internet usage. Using faceted plots, we are able to compare these results across different countries and age groups. Then, a linear model could be used to further examine the impact of age, education level, and country.
+    -   \<DEAN\>
 
 -   *What cleaning or transformation steps do you anticipate needing?*
 
