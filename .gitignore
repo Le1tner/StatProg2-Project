@@ -12,3 +12,6 @@ _site/
 Thumbs.db
 
 **/*.quarto_ipynb
+
+# renv
+renv/library/
