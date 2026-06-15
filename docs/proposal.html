@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dean Heilig">
 <meta name="author" content="Felix Leitner">
-<meta name="dcterms.date" content="2026-06-08">
+<meta name="dcterms.date" content="2026-06-15">
 
 <title>Project Proposal – StatProg2 Group Project</title>
 <style>
@@ -188,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 8, 2026</p>
+      <p class="date">June 15, 2026</p>
     </div>
   </div>
   
@@ -202,70 +202,105 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset"><strong>Dataset</strong></h2>
-<p><strong>Source:</strong> <a href="https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students" class="uri">https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students</a></p>
-<p><strong>Licence:</strong> <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0: Public Domain</a> Official licencing description: “You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.”</p>
-<p><strong>Description:</strong> First of all, it is important to note that this is a <strong>synthetic dataset</strong>, so we won’t be able to draw any real-world conclusions from our analysis. The dataset explores the impact, extent, and results of AI usage on students across many indicators such as student major, whether they have a paid subscription or not, pre- and post-semester GPA, and skill retention. Overall, this dataset includes data about 50,000 students across 15 indicators.</p>
-<p>Research Questions</p>
+<p><strong>Source:</strong> <a href="https://data-explorer.oecd.org/vis?lc=en&amp;tm=ICT&amp;pg=0&amp;snb=69&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_ICT_HH_IND%40DF_IND&amp;df%5Bag%5D=OECD.STI.DEP&amp;df%5Bvs%5D=1.1&amp;dq=.A........&amp;pd=,&amp;to%5BTIME_PERIOD%5D=false">https://data-explorer.oecd.org/vis?lc=en&amp;tm=ICT&amp;pg=0&amp;snb=69&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_ICT_HH_IND%40DF_IND&amp;df[ag]=OECD.STI.DEP&amp;df[vs]=1.1&amp;dq=.A……..&amp;pd=,&amp;to[TIME_PERIOD]=false</a></p>
+<p><strong>Licence:</strong> OECD Terms &amp; Conditions (Data – Section 3) “…you can extract from, download, copy, adapt, print, distribute, share and embed Data for any purpose, even for commercial use. You must give appropriate credit to the OECD…”</p>
+<p><strong>Description:</strong> The dataset contains information on ICT (information and communication technologies) usage among individuals across multiple indicators, such as age, sex, education level, income group, and purpose of ICT use.</p>
+<p>It is important to note that a pre-filtered version of the dataset will be used in the following analysis to reduce storage size (the full dataset is over 500MB) and to focus on the indicators required for the research questions. The applied filters will be documented in the data cleaning script located in <code>data/processed</code> and can be reproduced using the official OECD Data Explorer (link above).</p>
+<p>For this proposal, the following filters will be applied:</p>
+<ul>
+<li><p>Time period: 2021–2025</p></li>
+<li><p>Reference areas: Germany, United States, France</p></li>
+<li><p>Unit of measure: Percentage of population</p></li>
+<li><p>Age groups: 16–24, 25–54, 55–74</p></li>
+<li><p>Education level: Low, medium, and high educational attainment</p></li>
+</ul>
+<p>This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population.</p>
+<p><strong>Research Questions</strong></p>
 <ol type="1">
-<li><p>Does a paid subscription impact the improvement (or decline) of a student’s GPA?</p>
-<p>Needed columns: Post_Semester_GPA, Pre_Semester_GPA (difference), Paid_Subscription</p>
-<p>This question is explanatory but not causal. A possible improvement could have many reasons, such as higher dedication to studying among paying students.</p></li>
-<li><p>Which majors’ average GPA is most positively and negatively influenced by AI usage? And is this effect related to the fraction of time spent studying with AI compared to studying without AI?</p>
-<p>Needed columns: Major_Category, Post_Semester_GPA, Pre_Semester_GPA, Weekly_GenAI_Hours, Traditional_Study_Hours</p>
-<p>This question is explanatory but not causal. Differences between majors could also be caused by other factors, such as exam formats.</p></li>
+<li><p>Does education level influence the proportion of the population across different countries and age groups that use the internet daily or almost every day within the last quarter of the year? (From 2021-2025)</p>
+<p>Needed columns: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA</p>
+<p>This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.</p></li>
+<li></li>
+<li></li>
 </ol>
 </section>
 <section id="context-and-target-audience" class="level2">
 <h2 class="anchored" data-anchor-id="context-and-target-audience"><strong>Context and target audience</strong></h2>
-<p>Due to this dataset being synthetic, the results have no real-world relevance. However, the same analytical approach could still be useful if applied to a real dataset, where the results might be of interest in both academic and private contexts.</p>
-<p>The analysis could be relevant in both an academic and private context. In an academic context, it would be interesting to identify possible reasons behind correlations. For students, it could be beneficial to see trends in their own field of study in order to understand whether AI is more likely to be associated with positive or negative differences in academic performance. A short summary with the possibility of a deeper dive would therefore be the best presentation format to satisfy both target audiences.</p>
+<p>The results of the analysis could be of interest to businesses, as they may help to understand which categories of audiences are reachable through the internet and how these groups interact with the internet.</p>
+<p>A clean website presenting the results using professional language and visualizations would be appropriate.</p>
 </section>
 <section id="initial-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="initial-data-analysis"><strong>Initial data analysis</strong></h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 50,000
-Columns: 16
-$ Student_ID                 &lt;dbl&gt; 100001, 100002, 100003, 100004, 100005, 100…
-$ Major_Category             &lt;chr&gt; "Humanities", "Medical", "Business", "Busin…
-$ Year_of_Study              &lt;chr&gt; "Senior", "Junior", "Freshman", "Senior", "…
-$ Pre_Semester_GPA           &lt;dbl&gt; 2.418, 3.821, 3.398, 3.789, 3.635, 3.449, 3…
-$ Weekly_GenAI_Hours         &lt;dbl&gt; 23.31, 1.12, 21.26, 1.82, 9.29, 6.50, 31.41…
-$ Primary_Use_Case           &lt;chr&gt; "Copywriting/Drafting", "Ideation", "Summar…
-$ Prompt_Engineering_Skill   &lt;chr&gt; "Beginner", "Advanced", "Beginner", "Interm…
-$ Tool_Diversity             &lt;dbl&gt; 1, 5, 2, 4, 4, 1, 5, 3, 2, 2, 3, 3, 2, 1, 1…
-$ Paid_Subscription          &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, TR…
-$ Traditional_Study_Hours    &lt;dbl&gt; 8.13, 16.65, 10.35, 15.23, 12.55, 14.19, 13…
-$ Perceived_AI_Dependency    &lt;dbl&gt; 5, 3, 5, 2, 4, 4, 8, 2, 1, 3, 5, 3, 2, 2, 2…
-$ Institutional_Policy       &lt;chr&gt; "Allowed_With_Citation", "Allowed_With_Cita…
-$ Anxiety_Level_During_Exams &lt;dbl&gt; 6, 9, 9, 2, 4, 5, 7, 1, 5, 8, 3, 3, 4, 3, 4…
-$ Post_Semester_GPA          &lt;dbl&gt; 2.393, 3.696, 3.499, 4.000, 3.798, 3.666, 4…
-$ Skill_Retention_Score      &lt;dbl&gt; 86.44, 69.39, 73.93, 63.58, 100.00, 65.92, …
-$ Burnout_Risk_Level         &lt;chr&gt; "High", "Low", "Medium", "Medium", "Medium"…</code></pre>
+<pre><code>Rows: 4,330
+Columns: 42
+$ STRUCTURE                  &lt;chr&gt; "DATAFLOW", "DATAFLOW", "DATAFLOW", "DATAFL…
+$ STRUCTURE_ID               &lt;chr&gt; "OECD.STI.DEP:DSD_ICT_HH_IND@DF_IND(1.1)", …
+$ STRUCTURE_NAME             &lt;chr&gt; "ICT Access and Usage by Individuals", "ICT…
+$ ACTION                     &lt;chr&gt; "I", "I", "I", "I", "I", "I", "I", "I", "I"…
+$ REF_AREA                   &lt;chr&gt; "DEU", "DEU", "DEU", "DEU", "DEU", "DEU", "…
+$ `Reference area`           &lt;chr&gt; "Germany", "Germany", "Germany", "Germany",…
+$ FREQ                       &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A", "A", "A"…
+$ `Frequency of observation` &lt;chr&gt; "Annual", "Annual", "Annual", "Annual", "An…
+$ MEASURE                    &lt;chr&gt; "D1U_I", "D1B_I", "C5B1_I", "G1_I", "D1T_I"…
+$ Measure                    &lt;chr&gt; "Individuals using the internet for selling…
+$ UNIT_MEASURE               &lt;chr&gt; "PT_POP", "PT_POP", "PT_POP", "PT_POP", "PT…
+$ `Unit of measure`          &lt;chr&gt; "Percentage of population", "Percentage of …
+$ GEO_AREA                   &lt;chr&gt; "_Z", "_Z", "_Z", "_Z", "_Z", "_Z", "_Z", "…
+$ `Geographical area`        &lt;chr&gt; "Not applicable", "Not applicable", "Not ap…
+$ AGE                        &lt;chr&gt; "Y16T24", "Y16T24", "Y16T24", "Y16T24", "Y1…
+$ Age                        &lt;chr&gt; "From 16 to 24 years", "From 16 to 24 years…
+$ SEX                        &lt;chr&gt; "_T", "_T", "_T", "_T", "_T", "_T", "_T", "…
+$ Sex                        &lt;chr&gt; "Total", "Total", "Total", "Total", "Total"…
+$ EDUCATION_LEVEL            &lt;chr&gt; "HI", "HI", "HI", "HI", "HI", "HI", "HI", "…
+$ `Education level`          &lt;chr&gt; "High level of educational attainment", "Hi…
+$ INCOME_GROUP               &lt;chr&gt; "_T", "_T", "_T", "_T", "_T", "_T", "_T", "…
+$ `Income group`             &lt;chr&gt; "Total", "Total", "Total", "Total", "Total"…
+$ EMP_STATUS                 &lt;chr&gt; "_T", "_T", "_T", "_T", "_T", "_T", "_T", "…
+$ `Employment status`        &lt;chr&gt; "Total", "Total", "Total", "Total", "Total"…
+$ TIME_PERIOD                &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2…
+$ `Time period`              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ OBS_VALUE                  &lt;dbl&gt; 21.8518, 79.2020, 98.6700, 99.2543, 84.4278…
+$ `Observation value`        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ OBS_STATUS                 &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A", "A", "A"…
+$ `Observation status`       &lt;chr&gt; "Normal value", "Normal value", "Normal val…
+$ OBS_STATUS_2               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ `Observation status 2`     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ OBS_STATUS_3               &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ `Observation status 3`     &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ UNIT_MULT                  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ `Unit multiplier`          &lt;chr&gt; "Units", "Units", "Units", "Units", "Units"…
+$ TIME_HORIZON_USE           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ `Time horizon`             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ DECIMALS                   &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2…
+$ Decimals                   &lt;chr&gt; "Two", "Two", "Two", "Two", "Two", "Two", "…
+$ BREAKDOWN_V7_HH            &lt;chr&gt; "Y16_24HI", "Y16_24HI", "Y16_24HI", "Y16_24…
+$ `V7 Breakdowns households` &lt;chr&gt; "Individuals aged 16-24 with a high level o…</code></pre>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Post_Semester_GPA, Pre_Semester_GPA, Paid_Subscription, Major_Category, Weekly_GenAI_Hours, Traditional_Study_Hours) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code> Post_Semester_GPA Pre_Semester_GPA Paid_Subscription Major_Category    
- Min.   :1.000     Min.   :1.183    Mode :logical     Length:50000      
- 1st Qu.:3.024     1st Qu.:2.834    FALSE:28846       Class :character  
- Median :3.421     Median :3.210    TRUE :21154       Mode  :character  
- Mean   :3.349     Mean   :3.146                                        
- 3rd Qu.:3.749     3rd Qu.:3.521                                        
- Max.   :4.000     Max.   :3.998                                        
- Weekly_GenAI_Hours Traditional_Study_Hours
- Min.   : 0.000     Min.   : 1.00          
- 1st Qu.: 2.390     1st Qu.: 7.56          
- Median : 5.800     Median :11.18          
- Mean   : 8.428     Mean   :11.21          
- 3rd Qu.:11.720     3rd Qu.:14.71          
- Max.   :40.000     Max.   :35.86          </code></pre>
+<pre><code>     AGE            EDUCATION_LEVEL     TIME_PERIOD     OBS_VALUE      
+ Length:4330        Length:4330        Min.   :2021   Min.   :  0.000  
+ Class :character   Class :character   1st Qu.:2021   1st Qu.:  9.669  
+ Mode  :character   Mode  :character   Median :2023   Median : 28.495  
+                                       Mean   :2023   Mean   : 36.909  
+                                       3rd Qu.:2024   3rd Qu.: 62.133  
+                                       Max.   :2025   Max.   :100.000  
+   Measure            REF_AREA        
+ Length:4330        Length:4330       
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  
+                                      
+                                      
+                                      </code></pre>
 </div>
 </div>
 <p><strong>Plot 1 — Distribution of the outcome variable:</strong></p>
@@ -273,11 +308,11 @@ $ Burnout_Risk_Level         &lt;chr&gt; "High", "Low", "Medium", "Medium", "Med
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Post_Semester_GPA)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> OBS_VALUE)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Post-Semester GPA"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Post-Semester GPA"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of OBS_VALUE (percentage of the population for each indicator combination)"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"OBS_VALUE (%)"</span>,</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -294,15 +329,14 @@ $ Burnout_Risk_Level         &lt;chr&gt; "High", "Low", "Medium", "Medium", "Med
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Major_Category <span class="sc">==</span> <span class="st">"STEM"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Weekly_GenAI_Hours, <span class="at">y =</span> Post_Semester_GPA)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relationship between Post-Semester GPA and Hours Spent Studying with AI"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Weekly GenAI Hours"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Post-Semester GPA"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MEASURE <span class="sc">==</span> <span class="st">"C5A_I"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Education level</span><span class="st">`</span>, <span class="at">y =</span> OBS_VALUE)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relationship between education level and internet usage"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Education level"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Population share (%)"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -314,24 +348,27 @@ $ Burnout_Risk_Level         &lt;chr&gt; "High", "Low", "Medium", "Medium", "Med
 </div>
 <p><strong>Data quality issues:</strong></p>
 <ul>
-<li><p>Synthetic dataset → no real-world conclusions can be drawn. Creating a package with the functions used for the analysis would be useful if a real dataset with similar indicators becomes available in the future.</p></li>
-<li><p>At first glance, all indicators seem to be reasonably generated, with the exception of <strong>Post_Semester_GPA</strong>. As shown in the plot, there are too many top GPAs, so additional filtering may be required.</p></li>
+<li><p>We may need multiple differently pre-filtered versions of the original dataset, as some indicators rule each other out during filtering. This may be due to missing observations for certain combinations of indicators. For example, education level and employment status rule each other out.</p></li>
+<li><p>As a result, questions such as “How does education level influence employment status…” are not answerable with this dataset due to the absence of observations containing both indicators.</p></li>
+<li><p>There are also many useless columns. Some contain the same information in different formats, while others are entirely filled with NA values.</p></li>
+<li><p>The documentation is lackluster. The only documented indicator is MEASURE/ Measure. The remaining indicators are fortunately mostly self-explanatory or not needed for the analysis, but it is still important to note the lack of documentation.</p></li>
 </ul>
 </section>
 <section id="analysis-plan" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-plan"><strong>Analysis Plan</strong></h2>
 <ul>
 <li><p><em>Which variables will you use?</em></p>
-<p>As mentioned before: Post_Semester_GPA, Pre_Semester_GPA, Paid_Subscription, Major_Category, Weekly_GenAI_Hours, Traditional_Study_Hours</p></li>
+<ul>
+<li>Question 1: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA</li>
+</ul></li>
 <li><p><em>What analytical approach or method seems appropriate, and why?</em></p>
-<ol type="1">
-<li>A boxplot of the GPA difference (Post_Semester_GPA - Pre_Semester_GPA) for students with and without a paid subscription could provide a useful overview. A linear regression model (GPA Difference ~ Paid_Subscription) could be used for further investigation.</li>
-<li>A boxplot of the GPA difference for each major could help answer the first part of the question by comparing average performance changes across majors. For the second part, a multiple linear regression model such as GPA Difference ~ Major_Category + AI_Study_Fraction (Weekly_GenAI_Hours / Traditional_Study_Hours) could be appropriate.</li>
-</ol></li>
+<ul>
+<li>Question 1: First of all, we would use a boxplot to get a first insight into the relationship between education level and daily or almost daily internet usage. Using faceted plots, we are able to compare these results across different countries and age groups. Then, a linear model could be used to further examine the impact of age, education level, and country.</li>
+</ul></li>
 <li><p><em>What cleaning or transformation steps do you anticipate needing?</em></p>
-<p>Some columns need to be transformed into (ordered) factors, as already done in the practical. In addition, a GPA difference variable (Post_Semester_GPA - Pre_Semester_GPA) and an AI study fraction variable (Weekly_GenAI_Hours/ Traditional_Study_Hours) will likely be needed. Standard data analysis steps such as grouping, summarising and plotting will also be required.</p></li>
+<p>Categorical variables need to be declared as such during import. Columns that contain the same information in different formats can be removed. Columns that are not needed for the analysis can be dropped.</p></li>
 <li><p><em>What are the main uncertainties or risks (e.g.&nbsp;not enough data, confounding variables, missing values)?</em></p>
-<p>Unclear or useless results due to the dataset being synthetic.</p></li>
+<p>The biggest risk is the absence of certain indicator combinations. The research questions will need to be planned around this limitation. This dataset will not be able to answer every possible question based on the available indicators.</p></li>
 </ul>
 </section>
 <section id="workflow-organisation" class="level2">
@@ -340,8 +377,8 @@ $ Burnout_Risk_Level         &lt;chr&gt; "High", "Low", "Medium", "Medium", "Med
 <li><p><em>Code style:</em> We will follow the coding style taught in StatProg1 and StatProg2, including the use of the tidyverse style with piping (%&gt;%), the here package for file paths, and other conventions. We will enforce this using a code_style.md file, which documents used packages and coding style conventions.</p></li>
 <li><p><em>Packages:</em> tidyverse, janitor, here, …</p></li>
 <li><p><em>Git workflow:</em> There will always be at least two branches to avoid conflicts within the group. This, together with a clear separation of tasks, should help to prevent merge conflicts. We will also work on separate .qmd files, which will later be combined into a final document using the include command for additional modularity.</p></li>
-<li><p><em><code>.gitignore</code>:</em>&nbsp;</p></li>
-<li><p>.Rhistory .RData .Rproj.user/</p>
+<li><p><em><code>.gitignore</code>:</em>&nbsp;</p>
+<p>.Rhistory .RData .Rproj.user/</p>
 <p>/.quarto/ _site/</p>
 <p>.DS_Store Thumbs.db</p>
 <p>**/*.quarto_ipynb</p>

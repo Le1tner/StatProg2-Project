@@ -8,31 +8,45 @@ date: today
 
 ## **Dataset**
 
-**Source:** <https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students>
+**Source:** [https://data-explorer.oecd.org/vis?lc=en&tm=ICT&pg=0&snb=69&df\[ds\]=dsDisseminateFinalDMZ&df\[id\]=DSD_ICT_HH_IND%40DF_IND&df\[ag\]=OECD.STI.DEP&df\[vs\]=1.1&dq=.A........&pd=,&to\[TIME_PERIOD\]=false](https://data-explorer.oecd.org/vis?lc=en&tm=ICT&pg=0&snb=69&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_ICT_HH_IND%40DF_IND&df[ag]=OECD.STI.DEP&df[vs]=1.1&dq=.A........&pd=,&to[TIME_PERIOD]=false)
 
-**Licence:** [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/) Official licencing description: "You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission."
+**Licence:** OECD Terms & Conditions (Data – Section 3) “…you can extract from, download, copy, adapt, print, distribute, share and embed Data for any purpose, even for commercial use. You must give appropriate credit to the OECD…”
 
-**Description:** First of all, it is important to note that this is a **synthetic dataset**, so we won’t be able to draw any real-world conclusions from our analysis. The dataset explores the impact, extent, and results of AI usage on students across many indicators such as student major, whether they have a paid subscription or not, pre- and post-semester GPA, and skill retention. Overall, this dataset includes data about 50,000 students across 15 indicators.
+**Description:** The dataset contains information on ICT (information and communication technologies) usage among individuals across multiple indicators, such as age, sex, education level, income group, and purpose of ICT use.
 
-Research Questions
+It is important to note that a pre-filtered version of the dataset will be used in the following analysis to reduce storage size (the full dataset is over 500MB) and to focus on the indicators required for the research questions. The applied filters will be documented in the data cleaning script located in `data/processed` and can be reproduced using the official OECD Data Explorer (link above).
 
-1.  Does a paid subscription impact the improvement (or decline) of a student’s GPA?
+For this proposal, the following filters will be applied:
 
-    Needed columns: Post_Semester_GPA, Pre_Semester_GPA (difference), Paid_Subscription
+-   Time period: 2021–2025
 
-    This question is explanatory but not causal. A possible improvement could have many reasons, such as higher dedication to studying among paying students.
+-   Reference areas: Germany, United States, France
 
-2.  Which majors’ average GPA is most positively and negatively influenced by AI usage? And is this effect related to the fraction of time spent studying with AI compared to studying without AI?
+-   Unit of measure: Percentage of population
 
-    Needed columns: Major_Category, Post_Semester_GPA, Pre_Semester_GPA, Weekly_GenAI_Hours, Traditional_Study_Hours
+-   Age groups: 16–24, 25–54, 55–74
 
-    This question is explanatory but not causal. Differences between majors could also be caused by other factors, such as exam formats.
+-   Education level: Low, medium, and high educational attainment
+
+This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population.
+
+**Research Questions**
+
+1.  Does education level influence the proportion of the population across different countries and age groups that use the internet daily or almost every day within the last quarter of the year? (From 2021-2025)
+
+    Needed columns: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA
+
+    This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.
+
+2.  
+
+3.  
 
 ## **Context and target audience**
 
-Due to this dataset being synthetic, the results have no real-world relevance. However, the same analytical approach could still be useful if applied to a real dataset, where the results might be of interest in both academic and private contexts.
+The results of the analysis could be of interest to businesses, as they may help to understand which categories of audiences are reachable through the internet and how these groups interact with the internet.
 
-The analysis could be relevant in both an academic and private context. In an academic context, it would be interesting to identify possible reasons behind correlations. For students, it could be beneficial to see trends in their own field of study in order to understand whether AI is more likely to be associated with positive or negative differences in academic performance. A short summary with the possibility of a deeper dive would therefore be the best presentation format to satisfy both target audiences.
+A clean website presenting the results using professional language and visualizations would be appropriate.
 
 ## **Initial data analysis**
 
@@ -42,17 +56,18 @@ The analysis could be relevant in both an academic and private context. In an ac
 library(tidyverse)
 library(here)
 
-data_raw <- read_csv(here("data", "raw", "ai_student_impact.csv"))
+data_raw = read_csv(here("data", "raw", "ICT.csv"))
 ```
 
 ```{r}
 #| echo: false
+
 glimpse(data_raw)
 ```
 
 ```{r}
 data_raw %>%
-  dplyr::select(Post_Semester_GPA, Pre_Semester_GPA, Paid_Subscription, Major_Category, Weekly_GenAI_Hours, Traditional_Study_Hours) %>%
+  dplyr::select(AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA) %>%
   summary()
 ```
 
@@ -60,11 +75,11 @@ data_raw %>%
 
 ```{r}
 data_raw %>%
-  ggplot(aes(x = Post_Semester_GPA)) +
+  ggplot(aes(x = OBS_VALUE)) +
   geom_histogram(bins = 30) +
   labs(
-    title = "Distribution of Post-Semester GPA",
-    x = "Post-Semester GPA",
+    title = "Distribution of OBS_VALUE (percentage of the population for each indicator combination)",
+    x = "OBS_VALUE (%)",
     y = "Count"
   )
 ```
@@ -73,41 +88,43 @@ data_raw %>%
 
 ```{r}
 data_raw %>%
-  filter(Major_Category == "STEM") %>%
-  slice_sample(n = 1000) %>%
-  ggplot(aes(x = Weekly_GenAI_Hours, y = Post_Semester_GPA)) +
-  geom_point(alpha = 0.6) +
+  filter(MEASURE == "C5A_I") %>%
+  ggplot(aes(x = `Education level`, y = OBS_VALUE)) +
+  geom_boxplot() +
   labs(
-    title = "Relationship between Post-Semester GPA and Hours Spent Studying with AI",
-    x = "Weekly GenAI Hours",
-    y = "Post-Semester GPA",
+    title = "Relationship between education level and internet usage",
+    x = "Education level",
+    y = "Population share (%)",
   )
 ```
 
 **Data quality issues:**
 
--   Synthetic dataset → no real-world conclusions can be drawn. Creating a package with the functions used for the analysis would be useful if a real dataset with similar indicators becomes available in the future.
+-   We may need multiple differently pre-filtered versions of the original dataset, as some indicators rule each other out during filtering. This may be due to missing observations for certain combinations of indicators. For example, education level and employment status rule each other out.
 
--   At first glance, all indicators seem to be reasonably generated, with the exception of **Post_Semester_GPA**. As shown in the plot, there are too many top GPAs, so additional filtering may be required.
+-   As a result, questions such as “How does education level influence employment status…” are not answerable with this dataset due to the absence of observations containing both indicators.
+
+-   There are also many useless columns. Some contain the same information in different formats, while others are entirely filled with NA values.
+
+-   The documentation is lackluster. The only documented indicator is MEASURE/ Measure. The remaining indicators are fortunately mostly self-explanatory or not needed for the analysis, but it is still important to note the lack of documentation.
 
 ## **Analysis Plan**
 
 -   *Which variables will you use?*
 
-    As mentioned before: Post_Semester_GPA, Pre_Semester_GPA, Paid_Subscription, Major_Category, Weekly_GenAI_Hours, Traditional_Study_Hours
+    -    Question 1: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA
 
 -   *What analytical approach or method seems appropriate, and why?*
 
-    1.  A boxplot of the GPA difference (Post_Semester_GPA - Pre_Semester_GPA) for students with and without a paid subscription could provide a useful overview. A linear regression model (GPA Difference \~ Paid_Subscription) could be used for further investigation.
-    2.  A boxplot of the GPA difference for each major could help answer the first part of the question by comparing average performance changes across majors. For the second part, a multiple linear regression model such as GPA Difference \~ Major_Category + AI_Study_Fraction (Weekly_GenAI_Hours / Traditional_Study_Hours) could be appropriate.
+    -   Question 1: First of all, we would use a boxplot to get a first insight into the relationship between education level and daily or almost daily internet usage. Using faceted plots, we are able to compare these results across different countries and age groups. Then, a linear model could be used to further examine the impact of age, education level, and country.
 
 -   *What cleaning or transformation steps do you anticipate needing?*
 
-    Some columns need to be transformed into (ordered) factors, as already done in the practical. In addition, a GPA difference variable (Post_Semester_GPA - Pre_Semester_GPA) and an AI study fraction variable (Weekly_GenAI_Hours/ Traditional_Study_Hours) will likely be needed. Standard data analysis steps such as grouping, summarising and plotting will also be required.
+    Categorical variables need to be declared as such during import. Columns that contain the same information in different formats can be removed. Columns that are not needed for the analysis can be dropped.
 
 -   *What are the main uncertainties or risks (e.g. not enough data, confounding variables, missing values)?*
 
-    Unclear or useless results due to the dataset being synthetic.
+    The biggest risk is the absence of certain indicator combinations. The research questions will need to be planned around this limitation. This dataset will not be able to answer every possible question based on the available indicators.
 
 ## **Workflow organisation**
 
