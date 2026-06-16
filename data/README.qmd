@@ -1,0 +1,38 @@
+# Overview
+
+The dataset contains information on ICT (Information and Communication Technologies) usage among individuals across multiple indicators, such as age, sex, education level, income group, and purpose of ICT use.
+
+Each row represents a unique combination of multiple indicators, such as age and education level, together with an observed value representing either a proportion of the population or an individual count, depending on the selected unit of measure.
+
+**Correspondence table:** <https://webfs-sti.oecd.org/files/.Stat/DSD_ICT_HH_IND/indicators_hh_ind.pdf>
+
+To save storage space, we will be using pre-filtered subsets of the original dataset. This analysis will focus on the years 2021–2025 and the countries Germany, France, and the United States.
+
+**Source:** OECD 2026, ICT Access and Usage by Individuals, <https://data-explorer.oecd.org/vis?lc=en&tm=ICT&pg=0&snb=69&df%5Bds%5D=dsDisseminateFinalDMZ&df%5Bid%5D=DSD_ICT_HH_IND%40DF_IND&df%5Bag%5D=OECD.STI.DEP&df%5Bvs%5D=1.1&dq=.A........&pd=,&to%5BTIME_PERIOD%5D=false> (Accessed: 16.06.2026)
+
+**Licence:** OECD Terms & Conditions (Data – Section 3)
+
+# Variable dictionary:
+
+| Variable | Type | Description | Example / Range |
+|-------------------|-------------------|---------------|-------------------|
+| AGE | \<chr\> | Age group | Y16T24 (From 16 to 24 Years) |
+| EDUCATION_LEVEL | \<chr\> | Education Level | HI (High level of educational attainment) |
+| REF_AREA | \<chr\> | Country | DEU (Germany) |
+| TIME_PERIOD | \<int\> | Year | 2021-2025 |
+| OBS_VALUE | \<dbl\> | Part of the Population in % | 0 - 100 |
+| MEASURE | \<chr\> | ICT usage Indicator (see correspondence  table) | C2B_I (Individuals using a computer - last 3m) |
+
+# ICT_Dataset_q1.csv:
+
+Applied pre filters:
+
+-    Time period: 2021–2025
+
+-   Reference areas: Germany, United States, France
+
+-   Unit of measure: Percentage of population
+
+-   Age groups: 16–24, 25–54, 55–74
+
+-   Education level: Low, medium, and high educational attainment
