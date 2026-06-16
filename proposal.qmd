@@ -10,7 +10,7 @@ date: today
 
 **Source:** <https://data-explorer.oecd.org/vis?lc=en&tm=ICT&pg=0&snb=69&df%5Bds%5D=dsDisseminateFinalDMZ&df%5Bid%5D=DSD_ICT_HH_IND%40DF_IND&df%5Bag%5D=OECD.STI.DEP&df%5Bvs%5D=1.1&dq=.A........&pd=,&to%5BTIME_PERIOD%5D=false>
 
-**Licence:** OECD Terms & Conditions (Data – Section 3) “…you can extract from, download, copy, adapt, print, distribute, share and embed Data for any purpose, even for commercial use. You must give appropriate credit to the OECD…”
+**Licence:** OECD Terms & Conditions (Data – Section 3) “…you can extract from, download, copy, adapt, print, distribute, share and embed Data for any purpose, even for commercial use. You must give appropriate credit to the OECD…” Citation format: OECD (year), (dataset name),(data source) DOI or URL (accessed on (date))
 
 **Description:** The dataset contains information on ICT (information and communication technologies) usage among individuals across multiple indicators, such as age, sex, education level, income group, and purpose of ICT use.
 
@@ -56,7 +56,7 @@ A clean website presenting the results using professional language and visualiza
 library(tidyverse)
 library(here)
 
-data_raw = read_csv(here("data", "raw", "ICT.csv"))
+data_raw = read_csv(here("data", "raw", "ICT_dataset_q1.csv"))
 ```
 
 ```{r}
