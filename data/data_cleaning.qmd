@@ -1,0 +1,62 @@
+```{r}
+library(tidyverse)
+library(visdat)
+library(skimr)
+library(naniar)
+library(here)
+```
+
+```{r}
+data_raw = read_csv(here("data", "raw", "ICT_data_raw.csv"))
+```
+
+```{r}
+data_clean = data_raw %>% select(
+                       # Constant / metadata columns
+                       -STRUCTURE,
+                       -STRUCTURE_ID,
+                       -STRUCTURE_NAME,
+                       -ACTION,
+                       -FREQ,
+                       -`Frequency of observation`,
+                       -GEO_AREA,
+                       -`Geographical area`,
+                       -`Unit multiplier`,
+                       -UNIT_MULT,
+                       -Decimals,
+                       -DECIMALS,
+                       
+                       # Empty columns (no information)
+                       -`Time period`,
+                       -`Observation value`,
+                       -OBS_STATUS_3,
+                       -`Observation status 3`,
+                       -TIME_HORIZON_USE,
+                       -`Time horizon`,
+                       
+                       # Redundant label variables (coded versions kept). "Income group", "Employment status", and "V7 Breakdowns households" are deliberately kept because the corresponding coded versions are not clearly documented.
+                       -Measure,
+                       -`Reference area`,
+                       -`Unit of measure`,
+                       -Age,
+                       -Sex,
+                       -`Education level`,
+
+                        # Not used in analysis
+                       -OBS_STATUS,
+                       -`Observation status`,
+                       -OBS_STATUS_2,
+                       -`Observation status 2`,
+                       )
+
+write_csv(
+  data_clean,
+  here("data", "processed", "ICT_data_clean.csv")
+)
+```
+
+```{r}
+skim(data_clean)
+glimpse(data_clean)
+vis_dat(data_clean)
+```

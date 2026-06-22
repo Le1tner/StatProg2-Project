@@ -22,12 +22,6 @@ For this proposal, the following filters will be applied:
 
 -   Reference areas: Germany, United States, France
 
--   Unit of measure: Percentage of population
-
--   Age groups: 16–24, 25–54, 55–74
-
--   Education level: Low, medium, and high educational attainment
-
 This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population. It can be found in `data/raw` and is called: `ICT_dataset_q1.csv`. It will also be used to answer the Research Question 1 (q1).
 
 **Research Questions**

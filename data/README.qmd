@@ -15,24 +15,11 @@ To save storage space, we will be using pre-filtered subsets of the original dat
 # Variable dictionary:
 
 | Variable | Type | Description | Example / Range |
-|-------------------|-------------------|---------------|-------------------|
+|------------------|------------------|-----------------|------------------|
 | AGE | \<chr\> | Age group | Y16T24 (From 16 to 24 Years) |
 | EDUCATION_LEVEL | \<chr\> | Education Level | HI (High level of educational attainment) |
 | REF_AREA | \<chr\> | Country | DEU (Germany) |
 | TIME_PERIOD | \<int\> | Year | 2021-2025 |
 | OBS_VALUE | \<dbl\> | Part of the Population in % | 0 - 100 |
-| MEASURE | \<chr\> | ICT usage Indicator (see correspondence  table) | C2B_I (Individuals using a computer - last 3m) |
-
-# ICT_Dataset_q1.csv:
-
-Applied pre filters:
-
--    Time period: 2021–2025
-
--   Reference areas: Germany, United States, France
-
--   Unit of measure: Percentage of population
-
--   Age groups: 16–24, 25–54, 55–74
-
--   Education level: Low, medium, and high educational attainment
+| MEASURE | \<chr\> | ICT usage Indicator (see correspondence table) | C2B_I (Individuals using a computer - last 3m) |
+|  |  |  |  |

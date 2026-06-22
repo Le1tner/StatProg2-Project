@@ -1,17 +1,16 @@
-# R
+# R session files
 .Rhistory
 .RData
 .Rproj.user/
 
-# Quarto build artefacts
-/.quarto/
-_site/
-
-# OS
+# OS files
 .DS_Store
 Thumbs.db
 
-**/*.quarto_ipynb
-
 # renv
 renv/library/
+renv/staging/
+
+# Quarto cache
+.quarto/
+
