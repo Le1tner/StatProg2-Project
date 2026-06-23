@@ -4,6 +4,7 @@ library(visdat)
 library(skimr)
 library(naniar)
 library(here)
+library(dplyr)
 ```
 
 ```{r}
@@ -48,6 +49,17 @@ data_clean = data_raw %>% select(
                        -OBS_STATUS_2,
                        -`Observation status 2`,
                        )
+
+#get all cols with _T
+cols_with_T = data_clean %>%
+  select(where(~ any(.x == "_T", na.rm = TRUE))) %>%
+  names()
+
+#replace _T with Total 
+data_clean = data_clean %>%
+  mutate (
+    across(cols_with_T, ~ if_else(.x == "_T", "Total", .x))
+  )
 
 write_csv(
   data_clean,
