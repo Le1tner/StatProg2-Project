@@ -3,6 +3,7 @@ title: "Project Proposal"
 author:
   - "Dean Heilig"
   - "Felix Leitner"
+  - "Rafael Schörg"
 date: today
 ---
 
@@ -32,9 +33,9 @@ This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represent
 
     This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.
 
-2.  \<DEAN\>
+2. How did the education level change in the last few years in different countries and does the change correlate with the deployment status or income group or the internet or the age? (From 2021-2025)
 
-3.  
+3.   \<DEAN\>
 
 ## **Context and target audience**
 
@@ -107,12 +108,12 @@ data_raw %>%
 -   *Which variables will you use?*
 
     -   Question 1: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA
-    -   \<DEAN\>
+    -   Question 2: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, INCOME_GROUP, Employment Status
 
 -   *What analytical approach or method seems appropriate, and why?*
 
     -   Question 1: First of all, we would use a boxplot to get a first insight into the relationship between education level and daily or almost daily internet usage. Using faceted plots, we are able to compare these results across different countries and age groups. Then, a linear model could be used to further examine the impact of age, education level, and country.
-    -   \<DEAN\>
+    -   Question 2: To start with, we would draw a scatter plot to look how the education level changed over the last years in different countries. Afterwards we can use faceted plots to see if there have been changed in other variables that affected the curve
 
 -   *What cleaning or transformation steps do you anticipate needing?*
 
