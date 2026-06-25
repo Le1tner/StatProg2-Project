@@ -42,6 +42,8 @@ data_clean = data_raw %>% select(
                        -Age,
                        -Sex,
                        -`Education level`,
+                       -`Income group`,
+                       -`Employment status`,
 
                         # Not used in analysis
                        -OBS_STATUS,
