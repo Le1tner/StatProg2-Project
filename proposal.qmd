@@ -30,8 +30,6 @@ This pre-filtered dataset contains 42 columns and 19010 rows. Each row represent
 
 1.  Is education level associated with the proportion of the population that uses the internet daily or almost every day within different age groups?
 
-    *For the done analysis take a look in: 4.1_analysis.qmd in code/*
-
     Needed columns: AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE
 
     This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.
@@ -115,8 +113,8 @@ data_raw %>%
 
 -   *What analytical approach or method seems appropriate, and why?*
 
-    -   Question 1: We will regress `OBS_VALUE` (the share of the population using the internet daily or almost every day) on `EDUCATION_LEVEL`, `AGE`, and their interaction using linear regression. We will report a coefficient table with confidence intervals and a boxplot with `AGE` as facet. This addresses RQ1 because it quantifies the association between education level and daily internet use and assesses whether this association differs across age groups.
-    -   We will first create line plots showing how the proportion of the population using the internet daily or almost every day changed between 2021 and 2025 across different countries. We will then use faceted line plots to compare these trends across employment status or income groups. This exploratory analysis will help assess whether changes in internet use over time differ between employment or income groups.
+    -   Research Question 1: We will regress `OBS_VALUE` (the share of the population using the internet daily or almost every day) on `EDUCATION_LEVEL`, `AGE`, and their interaction using linear regression. We will report a coefficient table with confidence intervals and a boxplot with `AGE` as facet. This addresses RQ1 because it quantifies the association between education level and daily internet use and assesses whether this association differs across age groups.
+    -   Research Question 2: We will first create line plots showing how the proportion of the population using the internet daily or almost every day changed between 2021 and 2025 across different countries. We will then use faceted line plots to compare these trends across employment status or income groups. This exploratory analysis will help assess whether changes in internet use over time differ between employment or income groups.
 
 -   *What cleaning or transformation steps do you anticipate needing?*
 
