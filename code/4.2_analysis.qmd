@@ -1,0 +1,59 @@
+**Original Research Question:** How did proportion of the population that uses the internet daily or almost every day changed in the last few years in different countries and does the change correlate with the deployment status or income group? (From 2021-2025)
+
+**Original Analysis Plan:** To start with the draw a line that shows the mean of the internet usage over time.Then we would draw a box plot to look how the proportion of the population that uses the internet daily or almost every day changed over the last years in different countries. Afterwards we can use faceted plots to see if there have been changed in other variables (employment status or income group) that affected the curve.
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(here)
+library(gt)
+library(broom)
+library(scales)
+library(patchwork)
+```
+
+```{r}
+data = read_csv(here("data", "processed", "ICT_data_clean.csv"))
+```
+
+**Dataset Preparation:**
+
+```{r}
+data = read_csv(here("data", "processed", "ICT_data_clean.csv"))
+
+data = data %>%
+  filter(UNIT_MEASURE == "PT_POP") %>%
+  filter(MEASURE == "C5B1_I") %>%
+  select(-EDUCATION_LEVEL,-AGE,) 
+```
+
+**New Research Question:**
+
+**New analysis plan:**
+
+**Coefficient table:**
+
+```{r}
+
+```
+
+**Interpretation:**
+
+**Box-Plots:**
+
+```{r}
+create_boxplot <- function(data, col_name, col_title) {
+  ggplot(data, aes(x = .data[[col_name]], y = OBS_VALUE)) +
+    geom_boxplot() +
+    labs(
+      title = paste(col_title, "vs internet usage"),
+      x = col_title,
+      y = "Internet usage"
+    )
+}
+
+create_boxplot(data = data, col_name = "EMP_STATUS", col_title = "employment status")
+
+```
+
+**Interpretation:**

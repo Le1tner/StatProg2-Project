@@ -14,3 +14,6 @@ renv/staging/
 # Quarto cache
 .quarto/
 
+
+/.quarto/
+**/*.quarto_ipynb

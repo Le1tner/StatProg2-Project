@@ -15,27 +15,27 @@ date: today
 
 **Description:** The dataset contains information on ICT (information and communication technologies) usage among individuals across multiple indicators, such as age, sex, education level, income group, and purpose of ICT use.
 
-It is important to note that a pre-filtered version of the dataset will be used in the following analysis to reduce storage size (the full dataset is over 500MB) and to focus on the indicators required for the research questions. The applied filters will be documented in the data cleaning script located in `data/processed` and can be reproduced using the official OECD Data Explorer (link above).
+It is important to note that a pre-filtered version of the dataset will be used in the following analysis to reduce storage size (the full dataset is over 500MB).
 
-For this proposal, the following filters will be applied:
+The following filters will be applied:
 
 -   Time period: 2021–2025
 
 -   Reference areas: Germany, United States, France
 
-This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population. It can be found in `data/raw` and is called: `ICT_dataset_q1.csv`. It will also be used to answer the Research Question 1 (q1).
+This pre-filtered dataset contains 42 columns and 19010 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population or a count of people. It can be found in `data/raw` and is called: `ICT_data_raw.csv`.
 
 **Research Questions**
 
-1.  Does education level influence the proportion of the population across different countries and age groups that use the internet daily or almost every day within the last quarter of the year? (From 2021-2025)
+1.  Is education level associated with the proportion of the population that uses the internet daily or almost every day within different age groups?
 
-    Needed columns: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA
+    *For the done analysis take a look in: 4.1_analysis.qmd in code/*
+
+    Needed columns: AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE
 
     This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.
 
-2. How did the education level change in the last few years in different countries and does the change correlate with the deployment status or income group or the internet or the age? (From 2021-2025)
-
-3.   \<DEAN\>
+2.  How did proportion of the population that uses the internet daily or almost every day change in the last few years in different countries and does the change correlate with the deployment status or income group? (From 2021-2025)
 
 ## **Context and target audience**
 
@@ -51,7 +51,7 @@ A clean website presenting the results using professional language and visualiza
 library(tidyverse)
 library(here)
 
-data_raw = read_csv(here("data", "raw", "ICT_dataset_q1.csv"))
+data_raw = read_csv(here("data", "raw", "ICT_data_raw.csv"))
 ```
 
 ```{r}
@@ -70,12 +70,14 @@ data_raw %>%
 
 ```{r}
 data_raw %>%
+  filter(MEASURE == "C5B1_I") %>%
+  filter(UNIT_MEASURE == "PT_POP") %>%
   ggplot(aes(x = OBS_VALUE)) +
-  geom_histogram(bins = 30) +
+  geom_histogram() +
   labs(
-    title = "Distribution of OBS_VALUE (percentage of the population for each indicator combination)",
+    title = "Distribution of daily or almost daily internet use rates",
     x = "OBS_VALUE (%)",
-    y = "Count"
+    y = "Count of observations"
   )
 ```
 
@@ -95,7 +97,7 @@ data_raw %>%
 
 **Data quality issues:**
 
--   We may need multiple differently pre-filtered versions of the original dataset, as some indicators rule each other out during filtering. This may be due to missing observations for certain combinations of indicators. For example, education level and employment status rule each other out.
+-   Some indicators rule each other out. This may be due to missing observations for certain combinations of indicators. For example, education level and employment status rule each other out.
 
 -   As a result, questions such as “How does education level influence employment status…” are not answerable with this dataset due to the absence of observations containing both indicators.
 
@@ -107,13 +109,13 @@ data_raw %>%
 
 -   *Which variables will you use?*
 
-    -   Question 1: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA
-    -   Question 2: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, INCOME_GROUP, Employment Status
+    -   Research Question 1: AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE
+    -   Research Question 2: OBS_VALUE, MEASURE, INCOME_GROUP, EMP_STATUS
 
 -   *What analytical approach or method seems appropriate, and why?*
 
-    -   Question 1: First of all, we would use a boxplot to get a first insight into the relationship between education level and daily or almost daily internet usage. Using faceted plots, we are able to compare these results across different countries and age groups. Then, a linear model could be used to further examine the impact of age, education level, and country.
-    -   Question 2: To start with, we would draw a scatter plot to look how the education level changed over the last years in different countries. Afterwards we can use faceted plots to see if there have been changed in other variables that affected the curve
+    -   Question 1: We will regress `OBS_VALUE` (the share of the population using the internet daily or almost every day) on `EDUCATION_LEVEL`, `AGE`, and their interaction using linear regression. We will report a coefficient table with confidence intervals and a boxplot with `AGE` as facet. This addresses RQ1 because it quantifies the association between education level and daily internet use and assesses whether this association differs across age groups.
+    -   Question 2: To start with, we would draw a box plot to look how the proportion of the population that uses the internet daily or almost every day changed over the last years in different countries. Afterwards we can use faceted plots to see if there have been changed in other variables (employment status or income group) that affected the curve.
 
 -   *What cleaning or transformation steps do you anticipate needing?*
 
