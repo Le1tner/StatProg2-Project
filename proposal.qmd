@@ -4,6 +4,7 @@ author:
   - "Dean Heilig"
   - "Felix Leitner"
   - "Rafael Schörg"
+  - "Verena Thiemler"
 date: today
 ---
 
@@ -35,7 +36,7 @@ This pre-filtered dataset contains 42 columns and 19010 rows. Each row represent
 
     This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.
 
-2.  How did proportion of the population that uses the internet daily or almost every day change in the last few years in different countries and does the change correlate with the deployment status or income group? (From 2021-2025)
+2.  How has the proportion of the population using the internet daily or almost every day changed between 2021 and 2025 across different countries, and does this trend differ by employment status or income group?
 
 ## **Context and target audience**
 
@@ -110,12 +111,12 @@ data_raw %>%
 -   *Which variables will you use?*
 
     -   Research Question 1: AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE
-    -   Research Question 2: OBS_VALUE, MEASURE, INCOME_GROUP, EMP_STATUS
+    -   Research Question 2: OBS_VALUE, MEASURE, INCOME_GROUP, EMP_STATUS, TIME_PERIOD, REF_AREA
 
 -   *What analytical approach or method seems appropriate, and why?*
 
     -   Question 1: We will regress `OBS_VALUE` (the share of the population using the internet daily or almost every day) on `EDUCATION_LEVEL`, `AGE`, and their interaction using linear regression. We will report a coefficient table with confidence intervals and a boxplot with `AGE` as facet. This addresses RQ1 because it quantifies the association between education level and daily internet use and assesses whether this association differs across age groups.
-    -   Question 2: To start with, we would draw a box plot to look how the proportion of the population that uses the internet daily or almost every day changed over the last years in different countries. Afterwards we can use faceted plots to see if there have been changed in other variables (employment status or income group) that affected the curve.
+    -   We will first create line plots showing how the proportion of the population using the internet daily or almost every day changed between 2021 and 2025 across different countries. We will then use faceted line plots to compare these trends across employment status or income groups. This exploratory analysis will help assess whether changes in internet use over time differ between employment or income groups.
 
 -   *What cleaning or transformation steps do you anticipate needing?*
 
