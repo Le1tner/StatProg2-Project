@@ -31,9 +31,11 @@ This pre-filtered dataset contains 42 columns and 19010 rows. Each row represent
 
     Needed columns: AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE
 
-    This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.
-
 2.  How did the proportion of the population that uses the internet daily or almost every day change in the last few years in different countries and does the change correlate with the employment status or income group? (From 2021-2025)
+
+    Needed columns: OBS_VALUE, MEASURE, INCOME_GROUP, EMP_STATUS, TIME_PERIOD, REF_AREA
+
+Both questions are explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.
 
 ## **Context and target audience**
 
@@ -44,24 +46,22 @@ A clean website presenting the results using professional language and visualiza
 ## **Initial data analysis**
 
 ```{r}
-#| label: load-data and libraries
-#| include: false
 library(tidyverse)
 library(here)
 
 data_raw = read_csv(here("data", "raw", "ICT_data_raw.csv"))
-```
-
-```{r}
-#| echo: false
 
 glimpse(data_raw)
-```
 
-```{r}
 data_raw %>%
-  dplyr::select(AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA) %>%
+  dplyr::select(AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, MEASURE, REF_AREA, INCOME_GROUP, EMP_STATUS) %>%
   summary()
+
+categorical_variables = c("AGE", "EDUCATION_LEVEL", "TIME_PERIOD", "MEASURE", "REF_AREA", "INCOME_GROUP", "EMP_STATUS")
+
+data_raw %>%
+  select(all_of(categorical_variables)) %>%
+  map(unique)
 ```
 
 **Plot 1 — Distribution of the outcome variable:**
@@ -107,8 +107,8 @@ data_raw %>%
 
 -   *Which variables will you use?*
 
-    -   Research Question 1: AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE
-    -   Research Question 2: OBS_VALUE, MEASURE, INCOME_GROUP, EMP_STATUS, TIME_PERIOD, REF_AREA
+    -   **Research Question 1:** AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE
+    -   **Research Question 2:** OBS_VALUE, MEASURE, INCOME_GROUP, EMP_STATUS, TIME_PERIOD, REF_AREA
 
 -   *What analytical approach or method seems appropriate, and why?*
 
@@ -125,13 +125,13 @@ data_raw %>%
 
 ## **Workflow organisation**
 
--   *Code style:* We will follow the coding style taught in StatProg1 and StatProg2, including the use of the tidyverse style with piping (%\>%), the here package for file paths, and other conventions. We will enforce this using a code_style.md file, which documents used packages and coding style conventions.
+-   **Code style:** We will follow the coding style taught in StatProg1 and StatProg2, including the use of the tidyverse style with piping (%\>%), the here package for file paths, and other conventions. We will enforce this using a code_style.md file, which documents used packages and coding style conventions.
 
--   *Packages:* tidyverse, janitor, here, ...
+-   **Packages:** tidyverse, janitor, here, ...
 
--   *Git workflow:* There will always be at least two branches to avoid conflicts within the group. This, together with a clear separation of tasks, should help to prevent merge conflicts. We will also work on separate .qmd files, which will later be combined into a final document using the include command for additional modularity.
+-   **Git workflow:** There will always be at least two branches to avoid conflicts within the group. This, together with a clear separation of tasks, should help to prevent merge conflicts. We will also work on separate .qmd files, which will later be combined into a final document using the include command for additional modularity.
 
--   *`.gitignore`:* 
+-   **`.gitignore:`**
 
     .Rhistory .RData .Rproj.user/
 
