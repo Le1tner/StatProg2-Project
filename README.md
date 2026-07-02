@@ -1,6 +1,6 @@
 # Project Title
 
-> Analysis of Daily or Almost Daily Internet Use by Education, Age, Employment Status, and Income in Germany and France (2021–2025)
+> **Analysis of Daily or Almost Daily Internet Use by Education, Age, Employment Status, and Income in Germany and France (2021–2025)**
 
 ## Research Questions
 
