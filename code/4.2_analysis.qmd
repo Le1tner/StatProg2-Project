@@ -1,6 +1,6 @@
-**Original Research Question:** How did proportion of the population that uses the internet daily or almost every day changed in the last few years in different countries and does the change correlate with the deployment status or income group? (From 2021-2025)
+**Original Research Question:** How did the proportion of the population that uses the internet daily or almost every day change in the last few years in different countries and does the change correlate with the employment status or income group? (From 2021-2025)
 
-**Original Analysis Plan:** To start with the draw a line that shows the mean of the internet usage over time.Then we would draw a box plot to look how the proportion of the population that uses the internet daily or almost every day changed over the last years in different countries. Afterwards we can use faceted plots to see if there have been changed in other variables (employment status or income group) that affected the curve.
+**Original Analysis Plan:** To start, we draw a line that shows the mean of the internet usage over time.Then we would draw a box plot to look how the proportion of the population that uses the internet daily or almost every day changed over the last years in different countries. Afterwards we can use faceted plots to see if there have been changed in other variables (employment status or income group) that affected the curve.
 
 ```{r}
 library(tidyverse)
@@ -24,20 +24,85 @@ data = read_csv(here("data", "processed", "ICT_data_clean.csv"))
 data = data %>%
   filter(UNIT_MEASURE == "PT_POP") %>%
   filter(MEASURE == "C5B1_I") %>%
-  select(-EDUCATION_LEVEL,-AGE,) 
+  filter(EDUCATION_LEVEL == "Total") %>%
+  filter(SEX == "Total") %>%
+  filter(INCOME_GROUP != "Total" | EMP_STATUS != "Total") %>%
+  select(-EDUCATION_LEVEL,-AGE,-`V7 Breakdowns households`,-BREAKDOWN_V7_HH, -SEX) 
+
+emp_data <- data %>%
+  filter(INCOME_GROUP == "Total",
+         EMP_STATUS != "Total")
+
+inc_data <- data %>%
+  filter(INCOME_GROUP != "Total",
+         EMP_STATUS == "Total")
 ```
 
+As there are no observations of the required variables in other countries than France and Germany, we will only look at those two.
+
 **New Research Question:**
+How does the proportion of the population using the internet daily or almost daily differ by employment status and income group in France and Germany between 2021 and 2025?
 
 **New analysis plan:**
+Employment status and income group are modeled separately because they are provided mutually exclusive in the dataset and cannot be jointly included in a single regression model.
 
-**Coefficient table:**
+We will estimate OBS_VALUE ~ TIME_PERIOD * CATEGORY (CATEGORY being either INCOME_GROUP or EMP_STATUS) using linear regression to test whether the proportion of the population using the internet (almost) daily changes over time and differs across income groups. 
+
+Then we will add more plots to better visualise the findings / data.
+
+**Coefficient table for EMP_STATUS:**
 
 ```{r}
+data_emp <- data %>%
+  filter(INCOME_GROUP == "Total",
+         EMP_STATUS != "Total")
 
+data_emp$EMP_STATUS <- relevel(factor(data_emp$EMP_STATUS), ref = "SAL_SELF_FAM") # Employed as standard
+
+model_emp <- lm(OBS_VALUE ~ TIME_PERIOD * EMP_STATUS, data = data_emp)
+
+make_table(model_emp, "Linear regression results (Employment Status)", "OBS_VALUE ~ TIME_PERIOD + EMP_STATUS")
+
+make_table <- function(model, title, subtitle) { 
+  tidy(model, conf.int = TRUE) %>% 
+    gt() %>% 
+    fmt_number(decimals = 2) %>% 
+    fmt_number(columns = p.value, decimals = 3) %>% 
+    cols_label( term = "Term", 
+                estimate = "Estimate", 
+                std.error = "Std. Error", 
+                statistic = "Statistic", 
+                p.value = "P-Value", 
+                conf.low = "Conf. Low", 
+                conf.high = "Conf. High" ) %>% 
+    cols_align(align = "right", columns = where(is.numeric)) %>% 
+    tab_header( title = title, subtitle = subtitle ) %>% 
+    tab_source_note("Source: OECD ICT Access and Usage by Individuals") }
+```
+**Interpretation:**
+For Employment Status:
+  Both students and unemployed people have high p-values, therefore their estimated yearly growth isn't significantly different from the standard trend of 1.73 percentage points per year.
+  But if we look at retired and other people, then they have a low p-value combined with an estimate well above the average yearly growth, it can be assumed that yearly their proportion of (almost) daily internet users grows by 4.40 percentage points.
+
+  Important is, that the assumed baseline is that of employed people.
+  
+**Coefficient table for INCOME_GROUP:**
+
+```{r}
+data_inc <- data %>%
+  filter(INCOME_GROUP != "Total",
+         EMP_STATUS == "Total")
+
+data_inc$INCOME_GROUP <- relevel(factor(data_inc$INCOME_GROUP), ref = "IND_QNT3") # 3rd quintile is close to median
+model_inc <- lm(OBS_VALUE ~ TIME_PERIOD * INCOME_GROUP, data = data_inc)
+
+make_table(model_inc, "Linear regression results (Income Group)", "OBS_VALUE ~ TIME_PERIOD * INCOME_GROUP")
 ```
 
 **Interpretation:**
+For Income Group:
+There is no significant difference in how the proportion grows in the first, second and fourth quintile compared to the one in the middle (QNT3). 
+Only the fifth one seems to be below the average growth rates, growing about 1.45 percentage points per year. The p-value is very close to 0.05 but still below so it's still significant.
 
 **Box-Plots:**
 
@@ -46,13 +111,14 @@ create_boxplot <- function(data, col_name, col_title) {
   ggplot(data, aes(x = .data[[col_name]], y = OBS_VALUE)) +
     geom_boxplot() +
     labs(
-      title = paste(col_title, "vs internet usage"),
+      title = paste(col_title, "vs Internet Ssage"),
       x = col_title,
-      y = "Internet usage"
+      y = "Internet Usage"
     )
 }
 
-create_boxplot(data = data, col_name = "EMP_STATUS", col_title = "employment status")
+create_boxplot(data = data, col_name = "EMP_STATUS", col_title = "Employment Status")
+create_boxplot(data = data, col_name = "INCOME_GROUP", col_title = "Income Group")
 
 ```
 
