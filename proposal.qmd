@@ -4,6 +4,7 @@ author:
   - "Felix Leitner"
   - "Rafael Schörg"
   - "Verena Thiemler"
+  - "Dean Heilig"
 date: today
 ---
 
@@ -67,30 +68,13 @@ data_raw %>%
 **Plot 1 — Distribution of the outcome variable:**
 
 ```{r}
-data_raw %>%
-  filter(MEASURE == "C5B1_I") %>%
-  filter(UNIT_MEASURE == "PT_POP") %>%
-  ggplot(aes(x = OBS_VALUE)) +
-  geom_histogram() +
-  labs(
-    title = "Distribution of daily or almost daily internet use rates",
-    x = "OBS_VALUE (%)",
-    y = "Count of observations"
-  )
+knitr::include_graphics(here::here("docs", "eda_plot_1.png"))
 ```
 
 **Plot 2 — Relationship or trend relevant to a research question:**
 
 ```{r}
-data_raw %>%
-  filter(MEASURE == "C5A_I") %>%
-  ggplot(aes(x = `Education level`, y = OBS_VALUE)) +
-  geom_boxplot() +
-  labs(
-    title = "Relationship between education level and internet usage",
-    x = "Education level",
-    y = "Population share (%)",
-  )
+knitr::include_graphics(here::here("docs", "eda_plot_2.png"))
 ```
 
 **Data quality issues:**
