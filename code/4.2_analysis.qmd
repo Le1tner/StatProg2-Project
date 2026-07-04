@@ -10,6 +10,7 @@ library(gt)
 library(broom)
 library(scales)
 library(patchwork)
+library(grid)
 ```
 
 ```{r}
@@ -100,18 +101,44 @@ make_table(model_inc, "Linear regression results (Income Group)", "OBS_VALUE ~ T
 **Box-Plots:**
 
 ```{r}
-create_boxplot <- function(data, col_name, col_title) {
+
+create_boxplot = function(data, col_name, col_title) {
   ggplot(data, aes(x = .data[[col_name]], y = OBS_VALUE)) +
     geom_boxplot() +
     labs(
-      title = paste(col_title, "vs Internet Ssage"),
+      title = paste(col_title, "vs Internet Usage"),
       x = col_title,
       y = "Internet Usage"
     )
 }
 
-create_boxplot(data = data, col_name = "EMP_STATUS", col_title = "Employment Status")
-create_boxplot(data = data, col_name = "INCOME_GROUP", col_title = "Income Group")
+create_emp_income_for = function(data, area_value) {
+  df_country = data %>% 
+    mutate(
+      REF_AREA = case_when(
+        REF_AREA == "DEU" ~ "Germany",
+        REF_AREA == "FRA" ~ "France",
+        TRUE ~ REF_AREA
+      )
+    ) %>%
+    filter(REF_AREA == area_value) 
+  p1 = create_boxplot(df_country, "EMP_STATUS", "Employment Status")
+  p2 = create_boxplot(df_country, "INCOME_GROUP", "Income Group")
+  return(
+    (p1 | p2)
+  )
+}
+
+#Germany
+create_emp_income_for(data, "Germany") +
+  plot_annotation(title = "Internet Usage vs Income Group and Employment Status in Germany")
+
+#France
+create_emp_income_for(data, "France") +
+  plot_annotation(title = "Internet Usage vs Income Group and Employment Status in France")
+
 ```
 
 **Interpretation:**
+
+First of all for Germany
