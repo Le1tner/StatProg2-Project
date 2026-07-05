@@ -10,7 +10,7 @@ library(gt)
 library(broom)
 library(scales)
 library(patchwork)
-library(grid)
+library(stringr)
 ```
 
 ```{r}
@@ -102,13 +102,15 @@ make_table(model_inc, "Linear regression results (Income Group)", "OBS_VALUE ~ T
 
 ```{r}
 
+unique(data$INCOME_GROUP)
 create_boxplot = function(data, col_name, col_title) {
   ggplot(data, aes(x = .data[[col_name]], y = OBS_VALUE)) +
     geom_boxplot() +
+    scale_x_discrete(labels = function(x) str_trunc(x, 7)) +
     labs(
       title = paste(col_title, "vs Internet Usage"),
       x = col_title,
-      y = "Internet Usage"
+      y = "Internet Usage",
     )
 }
 
@@ -121,7 +123,12 @@ create_emp_income_for = function(data, area_value) {
         TRUE ~ REF_AREA
       )
     ) %>%
-    filter(REF_AREA == area_value) 
+    filter(REF_AREA == area_value) %>%
+    mutate(
+      INCOME_GROUP = str_remove_all(INCOME_GROUP, "IND_")
+    )
+
+  
   p1 = create_boxplot(df_country, "EMP_STATUS", "Employment Status")
   p2 = create_boxplot(df_country, "INCOME_GROUP", "Income Group")
   return(
@@ -141,4 +148,8 @@ create_emp_income_for(data, "France") +
 
 **Interpretation:**
 
-First of all for Germany
+A small note for the interpretation: employment status has the values: "Total" , "Employees, Self-employed and family workers", "Retired and other inactive", "Students", "Unemployed". Also by internet usage I mean the percentage of people who use the internet daily or almost daily.
+
+First of all for France we see that there is a big difference in the internet usage depending on the employment status. Retired and other inactive people have a lower internet usage, the unemployed and the employees and self employed have a higher internet usage. The biggest internet usage according to this statics in France do the students have. In France we can see a growth from the 3rd to the 5th income quantile in internet usage.
+
+Now if we look into Germany we can also see the lowest internet usage for the retired and other inactive employment status. Here is a small difference to France the unemployed have a clear lower internet usage, then the employees and self-employed and family workers. Here we also have the students as the employment status with the highest internet usage. With the income group in Germany we can also see the trend, that a higher income group means a higher internet usage.
