@@ -1,10 +1,7 @@
-Dataset: [Dataset name]
-Source:  [URL]
-Licence: [e.g. Creative Commons Attribution 4.0 International (CC BY 4.0)]
-         [Licence URL]
+Dataset: ICT Access and Usage by Individuals
+Source:  https://www.oecd.org/en.html
+Licence: OECD Terms & Conditions (Data – Section 3)
+         https://www.oecd.org/en/about/terms-conditions.html
 
-Downloaded: [YYYY-MM-DD]
-Downloaded by: [Name]
-
-Notes:
-  [Any restrictions, attribution requirements, or caveats]
+Downloaded: 18. June 2026 at 08:43
+Downloaded by: Felix Leitner
