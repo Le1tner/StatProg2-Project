@@ -1,0 +1,17 @@
+Package: ict.analysis.package
+Title: ICT Analysis Helper Package
+Version: 0.0.0.9000
+Authors@R: 
+     person("Felix", "Leitner", email = "F.Leitner@campus.lmu.de", role = c("aut", "cre"))
+Description: The package provides 2 functions.
+              1. make_table() => Generate a Formatted Regression Table.
+              2. create_boxplot => Create Standardized Boxplots for ICT Data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+Imports: 
+    broom,
+    ggplot2,
+    gt,
+    scales
