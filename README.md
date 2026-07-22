@@ -68,7 +68,7 @@ For more information read the package `README.md` in `ict.analysis.package/`
 ├── proposal.qmd            # Project proposal
 ├── report.qmd              # Final analysis report
 ├── group-reflection.qmd    # Group reflection document
-└── CONTRIBUTING            # each member’s contribution statement and AI disclosure
+└── CONTRIBUTING.md         # contribution statement and AI disclosure
 ```
 
 ## **How to reproduce**
