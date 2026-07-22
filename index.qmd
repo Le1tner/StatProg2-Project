@@ -12,7 +12,7 @@ date: today
 
 In the modern digital era, consistent internet access has become a cornerstone of daily life, influencing professional opportunities, education, and social inclusion. Despite rapid technological expansion, digital divides persist across various demographic lines. Understanding these disparities is crucial for evaluating how socioeconomic factors shape digital participation and for fostering an inclusive digital society.
 
-This project investigates these patterns by leveraging the comprehensive **OECD ICT Access and Usage by Individuals** dataset, focusing on the years 2021 to 2025. Specifically, we explore how formal education levels and age groups interact to shape digital engagement. To operationalize this, our analysis is guided by the following core research question: ***Is education level associated with the proportion of the population that uses the internet daily or almost every day within different age groups?***
+This project investigates these patterns by leveraging the comprehensive **OECD ICT Access and Usage by Individuals** dataset, focusing on the years 2021 to 2025. Specifically, we explore how formal education levels and age groups interact to shape digital engagement. To operationalize this, our analysis is guided by the following core research question: **Is education level associated with the proportion of the population that uses the internet daily or almost every day within different age groups?**
 
 ## Data
 
@@ -36,4 +36,4 @@ Our analysis reveals that the relationship between education level and daily int
 
 ## Discussion
 
-These findings are far from insignificant and highlight a persistent digital divide concentrated primarily among older populations, where education plays a vital bridging role. Because our model captures statistical associations rather than direct causal mechanisms—and faced limitations like structural data gaps—further investigation is needed. Future research should examine the underlying reasons for these age-specific gaps and explore how targeted digital literacy initiatives can help bridge them.
+These findings are far from insignificant and highlight a persistent digital divide concentrated primarily among older populations, where education plays a vital bridging role. Because our model captures statistical associations rather than direct causal mechanisms and faced limitations like structural data gaps, further investigation is needed. Future research should examine the underlying reasons for these age-specific gaps and explore how targeted digital literacy initiatives can help bridge them.
