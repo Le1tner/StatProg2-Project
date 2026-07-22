@@ -38,7 +38,7 @@ plot_p1 = data %>%
     y = "Count of observations"
   )
 plot_p1
-ggsave(here("docs", "eda_plot_1.png"), plot_p1)
+ggsave(here("images", "eda_plot_1.png"), plot_p1)
 
 # Plot 2 — Relationship or trend relevant to a research question 1:
 plot_p2 = data %>%
@@ -51,4 +51,4 @@ plot_p2 = data %>%
     y = "Population share (%)"
   )
 plot_p2
-ggsave(here("docs", "eda_plot_2.png"), plot_p2)
+ggsave(here("images", "eda_plot_2.png"), plot_p2)

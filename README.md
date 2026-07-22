@@ -1,4 +1,4 @@
-# **Analysis of Daily or Almost Daily Internet Use by Education and Age, in Germany and France (2021–2025)**
+# Analysis of Daily or Almost Daily Internet Use by Education and Age, in Germany and France (2021–2025)
 
 ## Research Question
 
@@ -29,7 +29,7 @@
 ## **Variable dictionary:**
 
 | **Variable** | **Type** | **Description** | **Example / Range** |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | AGE | \<chr\> | Age group | Y16T24 (From 16 to 24 Years) |
 | EDUCATION_LEVEL | \<chr\> | Education level | HI (High level of educational attainment) |
 | REF_AREA | \<chr\> | Country | DEU (Germany) |
@@ -55,12 +55,20 @@ For more information read the package `README.md` in `ict.analysis.package/`
 ## **Repository Structure**
 
 ```         
-data/raw/        read-only raw data and licence documentation
-data/processed/  cleaned data produced by code/02_clean.R
-code/            numbered R scripts (1 download → 2 clean → 3 EDA → 4 analysis)
-docs/            rendered Quarto website output (auto-generated, do not edit)
-proposal.qmd     project proposal
-report.qmd       final analysis report
+├── code/                   # Numbered R scripts (1_download.R → 2_data_cleaning.R → 3_eda.R                                                   → 4_analysis.R)
+├── data/
+│   ├── raw/                # Read-only raw data and licence documentation
+│   └── processed/          # Cleaned data produced by code/2_data_cleaning.R
+├── docs/                   # Rendered Quarto website output (auto-generated, do not edit)
+├── images/                 # Saved plots and tables
+├── ict.analysis.package/   # Custom R helper package
+├── renv/ & renv.lock       # Dependency management for reproducible R environment
+├── _quarto.yml             # Quarto website configuration
+├── index.qmd               # Landing page of the website
+├── proposal.qmd            # Project proposal
+├── report.qmd              # Final analysis report
+├── group-reflection.qmd    # Group reflection document
+└── CONTRIBUTING.md         # contribution statement and AI disclosure
 ```
 
 ## **How to reproduce**
@@ -71,7 +79,7 @@ renv::restore()   # if using renv, otherwise install packages manually
 
 # 2. Run the pipeline in order
 source("code/1_download.R")
-source("code/2_clean.R")
+source("code/2_data_cleaning.R")
 source("code/3_eda.R")
 source("code/4_analysis.R")
 

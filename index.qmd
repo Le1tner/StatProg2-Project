@@ -1,9 +1,10 @@
 ---
-title: "Project Title"
+title: "Analysis of Daily or Almost Daily Internet Use by Education and Age, in Germany and France (2021–2025)"
 author:
-  - "Group Member 1"
-  - "Group Member 2"
-  - "Group Member 3"
+  - "Felix Leitner"
+  - "Verena Thiemler"
+  - "Rafael Schörg"
+  - "Dean Heilig"
 date: today
 ---
 

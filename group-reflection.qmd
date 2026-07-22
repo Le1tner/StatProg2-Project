@@ -8,116 +8,122 @@ For each skill area, describe what your group actually used it for. If you did n
 
 ### Functions & refactoring (W2)
 
-*What we did:*
+*What we did:* We wrote custom functions and bundled them inside our own helper package. We actively tried to follow the DRY (Don't Repeat Yourself) principle.
 
-*What worked well:*
+*What worked well:* As Computer Science students, we are quite used to writing functions, so the technical implementation went smoothly.
 
-*What was hard:*
+*What was hard:* Deciding on the right amount of parameters. It was a balancing act: too many parameters make a function unintuitive to use, but too few make it unflexible.
 
 ### Debugging (W3)
 
-*What we did:*
+*What we did:* We relied on built-in error messages, stack traces, and used AI to help us interpret obscure errors.
 
-*What worked well:*
+*What worked well:* Most common errors were easily fixed just by carefully reading the error messages.
 
-*What was hard:*
+*What was hard:* Some errors that occurred during the package development and testing phase were very cryptic and hard to understand. However, we found that simply restarting the R session or re-installing the package often resolved these underlying issues.
 
 ### Version control & remotes (W4)
 
-*What we did:*
+*What we did:* We used Git and GitHub for version control, utilizing different branches for specific tasks to avoid conflicts.
 
-*What worked well:*
+*What worked well:* The general day-to-day workflow (pull, commit, push) went smoothly.
 
-*What was hard:*
+*What was hard:* Dealing with merge conflicts and Git's default behaviors. For example, during a merge, we temporarily lost our `README.md` due to a merge overriding local changes, but successfully managed to recover it using `git checkout <commit-hash> -- README.md`.
 
 ### Quarto websites & collaborative coding (W5)
 
-*What we did:*
+*What we did:* We used the `_quarto.yml` file to configure our website and specifically defined which `.qmd` documents needed to be rendered. We hosted the final website on GitHub Pages.
 
-*What worked well:*
+*What worked well:* After some initial confusion, website configuration using `_quarto.yml` became very intuitive. Working on separate branches successfully prevented major merge conflicts for the most part.
 
-*What was hard:*
+*What was hard:* Sometimes, commits were accidentally made to the wrong branch. When merge conflicts did happen, resolving them was tough. One wrong terminal command can quickly lead to a confusing git and repository state.
 
 ### R packages (W6)
 
-*What we did:*
+*What we did:* We created a small helper package containing two functions: one for generating a formatted coefficient table (`gt`) and one for creating a specific (optionally) faceted boxplot.
 
-*What worked well:*
+*What worked well:* After revisiting the corresponding practical, the workflow using `devtools`, `usethis`, and `roxygen2` worked very well. Writing `roxygen2` documentation (`@param`, `@returns`) forced us to look at our functions from a user's perspective early on. This naturally led us to design clearer and simpler arguments, making the package interface much more intuitive. The package is fully functional and can be downloaded from our GitHub repository.
 
-*What was hard:*
+*What was hard:* We decided to keep the package within our main project repository, even though tools like `devtools` and AI strongly advised us to create a separate repository for it. Navigating the package testing errors in this nested setup required some extra troubleshooting.
 
 ### Initial data analysis & data cleaning (W7)
 
-*What we did:*
+*What we did:* We used functions like `glimpse()` and `summary()` to gain initial insights into the dataset. During data cleaning, we dropped all unnecessary columns to streamline our analysis.
 
-*What worked well:*
+*What worked well:* Doing a thorough Initial Data Analysis (IDA) actually revealed that our first dataset was heavily flawed. Catching this early on saved us from wasting a lot of time further down the line.
 
-*What was hard:*
+*What was hard:* Our final dataset was poorly documented in parts and had quite a few columns. It took considerable time to understand what each column represented and to decide what to keep and what to filter out. At this time we thought we had no problems with missing values, until we found implicit missingness later on and had to reshape our first research question. Next time we could be a bit more careful and catch those things earlier as well.
 
 ### Reproducibility, open data & renv (W9)
 
-*What we did:*
+*What we did:* We used `renv` to keep track of our package dependencies and chose a dataset from a known, trusted source.
 
-*What worked well:*
+*What worked well:* We encountered no issues using `renv`. We were especially pleased to see that it was even able to properly track our own local helper package.
 
-*What was hard:*
+*What was hard:* Finding the data license. There was no clearly named license file (as we learned to look for in the lecture), so we had to dig through the OECD's Terms and Conditions to eventually find the relevant usage rights.
 
 ### Analysis & inference strategies (W10)
 
-*What we did:*
+*What we did:* We chose a linear model with an interaction term to properly answer our research question.
 
-*What worked well:*
+*What worked well:* Once we settled on the correct model structure, fitting it to the data went smoothly.
 
-*What was hard:*
+*What was hard:* We had little prior experience applying a linear model to a real-world dataset with multiple indicators. Initially, we picked the wrong model specification (using `+` for additive effects instead of `*` for the required interaction), which we had to correct.
 
 ### Communication & visualisation (W11)
 
-*What we did:*
+*What we did:* We presented the results of our linear model using a formatted `gt` table and subsequently visualized the data using a faceted boxplot. To improve readability, we used `fct_recode()` to clean up variable names and adjusted the y-axis using `scale_y_continuous()`.
 
-*What worked well:*
+*What worked well:* The technical design of both the table and the plot was straightforward. For our `{gt}` table, a deliberate choice was using `fmt_number()` to restrict decimal places to convey exact results without cluttering the table. We also made sure to include `#| fig-alt` tags for accessibility and used the plot subtitle as a direct summary of our results, as taught in the lecture.
 
-*What was hard:*
+*What was hard:* Condensing the results. It was challenging to explain the statistical output of the table and the visual results of the boxplot in a way that is as short, precise, and accessible as possible for future readers.
 
 ## Key analytical decisions
 
 Describe 2–3 decisions that had a meaningful effect on your results or workflow.
 
-### Decision 1: \[short title\]
+### Decision 1: Changing the dataset after a bad first impression during IDA
 
-*What were we deciding between?*
+*What were we deciding between?* Keeping the initial dataset and accepting the flaws/creating workarounds, or dropping it and starting from scratch with a new one.
 
-*How did we reason through it?*
+*How did we reason through it?* We realized that the exact purpose of Initial Data Analysis (IDA) is to catch fundamental data issues. We decided it was better to drop a bad dataset early (avoiding the sunk cost fallacy) rather than wasting time trying to fix unfixable data.
 
-*In hindsight, would we decide differently?*
+*In hindsight, would we decide differently?* No.
 
-### Decision 2: \[short title\]
+### Decision 2: Adjusting the research question due to data limitations
 
-*What were we deciding between?*
+*What were we deciding between?* Dropping the research question entirely or adjusting its scope.
 
-*How did we reason through it?*
+*How did we reason through it?* After gaining deeper insights into the dataset, we found structural missingness: there were simply no observations for certain combinations of indicators. Since we cannot analyze data that doesn't exist, and this was only a sub-part of our main question, we chose to slightly adjust the scope of the research question rather than scrapping all our work.
 
-*In hindsight, would we decide differently?*
+*In hindsight, would we decide differently?* No.
 
 ## Workflow & collaboration
 
-*How did we divide work across group members?*
+*How did we divide work across group members?* Originally, the group was supposed to be split into two sub-groups, with each focusing on one of two research questions. However, as our focus and available time shifted during the semester, we decided to drop research question 2 entirely to fully focus our resources on executing research question 1 thoroughly.
 
-*What branching or Git workflow did we actually use — and did it match the proposal?*
+*What branching or Git workflow did we actually use — and did it match the proposal?* We stuck to the proposed plan of using different branches for each major task and research question. We did, however, deviate from the proposal by not creating the planned `code_style.md` file.
 
-*What would we change about how we coordinated?*
+*What would we change about how we coordinated?* The missing `code_style.md` file didn't hurt our workflow much, as we all share a similar educational background (StatProg1) and were taught similar coding conventions anyway. However, in a more heterogeneous group, skipping this step could have caused significant stylistic clashes.
 
 ## LLM usage
 
 Describe up to 5 significant uses of an LLM tool during the project.
 
-### Usage 1: \[task\]
+### Usage 1: Debugging and Error Interpretation
 
--   **Tool / model:**
--   **What it produced:**
--   **What we had to correct or verify:**
+-   **Tool / model:** Google Gemini
+-   **What it produced:** Explanations of cryptic R and package-building error messages. We rarely asked for direct code fixes, but rather for explanations so we could handle the fixes ourselves.
+-   **What we had to correct or verify:** The LLM does not have the full context of the project. For example, it continuously recommended creating a separate GitHub repository for our R package. We had to critically evaluate this advice and overrule the AI, as we intentionally wanted to keep it within the main repo for this specific project.
 
-### Usage 2: \[task\]
+### Usage 2: Resolving Git and Workflow Crises
 
--   **Tool / model:**
--   **What it produced:**
--   **What we had to correct or verify:**
+-   **Tool / model:** Google Gemini
+-   **What it produced:** Step-by-step terminal commands to resolve merge conflicts, exit unfamiliar terminal environments and recover lost files.
+-   **What we had to correct or verify:** We had to ensure the suggested Git commands (like `git checkout HEAD~1 -- README.md`) matched the exact commit hashes and file names in our local environment before executing them. Generally, it was highly reliable for Git troubleshooting. And the risk in this specific use case is low, as in the worst case you would just go back one commit and lose minimal progress (if commits were done regularly before).
+
+### Usage 3: Text Improvement and Proofreading
+
+-   **Tool / model:** Google Gemini
+-   **What it produced:** Corrections for grammar, spelling, and improvements in academic/statistical terminology for our final report and reflection.
+-   **What we had to correct or verify:** We reviewed all suggestions to ensure our personal voice and intended meaning were preserved. We frequently adjusted the AI's phrasing to sound more natural and to match how we would organically formulate the text.
