@@ -1,6 +1,10 @@
 project:
   type: website
   output-dir: docs
+  render: 
+    - index.qmd
+    - proposal.qmd
+    - report.qmd
 
 website:
   title: "StatProg2 Group Project"

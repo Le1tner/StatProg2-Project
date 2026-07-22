@@ -68,13 +68,13 @@ data_raw %>%
 **Plot 1 — Distribution of the outcome variable:**
 
 ```{r}
-knitr::include_graphics(here::here("docs", "eda_plot_1.png"))
+knitr::include_graphics(here::here("images", "eda_plot_1.png"))
 ```
 
 **Plot 2 — Relationship or trend relevant to a research question:**
 
 ```{r}
-knitr::include_graphics(here::here("docs", "eda_plot_2.png"))
+knitr::include_graphics(here::here("images", "eda_plot_2.png"))
 ```
 
 **Data quality issues:**
