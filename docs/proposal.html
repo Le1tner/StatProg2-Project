@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Dean Heilig">
 <meta name="author" content="Felix Leitner">
-<meta name="dcterms.date" content="2026-06-15">
+<meta name="author" content="Rafael Schörg">
+<meta name="author" content="Verena Thiemler">
+<meta name="author" content="Dean Heilig">
+<meta name="dcterms.date" content="2026-07-22">
 
 <title>Project Proposal – StatProg2 Group Project</title>
 <style>
@@ -25,41 +27,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -138,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Proposal</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./report.qmd"> 
+    <a class="nav-link" href="./report.html"> 
 <span class="menu-text">Report</span></a>
   </li>  
 </ul>
@@ -180,15 +147,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
-             <p>Dean Heilig </p>
              <p>Felix Leitner </p>
+             <p>Rafael Schörg </p>
+             <p>Verena Thiemler </p>
+             <p>Dean Heilig </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 15, 2026</p>
+      <p class="date">July 22, 2026</p>
     </div>
   </div>
   
@@ -202,27 +171,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset"><strong>Dataset</strong></h2>
-<p><strong>Source:</strong> <a href="https://data-explorer.oecd.org/vis?lc=en&amp;tm=ICT&amp;pg=0&amp;snb=69&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_ICT_HH_IND%40DF_IND&amp;df%5Bag%5D=OECD.STI.DEP&amp;df%5Bvs%5D=1.1&amp;dq=.A........&amp;pd=,&amp;to%5BTIME_PERIOD%5D=false">https://data-explorer.oecd.org/vis?lc=en&amp;tm=ICT&amp;pg=0&amp;snb=69&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_ICT_HH_IND%40DF_IND&amp;df[ag]=OECD.STI.DEP&amp;df[vs]=1.1&amp;dq=.A……..&amp;pd=,&amp;to[TIME_PERIOD]=false</a></p>
-<p><strong>Licence:</strong> OECD Terms &amp; Conditions (Data – Section 3) “…you can extract from, download, copy, adapt, print, distribute, share and embed Data for any purpose, even for commercial use. You must give appropriate credit to the OECD…”</p>
+<p><strong>Source:</strong> <a href="https://data-explorer.oecd.org/vis?lc=en&amp;tm=ICT&amp;pg=0&amp;snb=69&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_ICT_HH_IND%40DF_IND&amp;df%5Bag%5D=OECD.STI.DEP&amp;df%5Bvs%5D=1.1&amp;dq=.A........&amp;pd=,&amp;to%5BTIME_PERIOD%5D=false">OECD ICT Access and Usage by Individuals</a> (Accessed: 16.06.2026)</p>
+<p><a href="https://data-explorer.oecd.org/vis?lc=en&amp;tm=ICT&amp;pg=0&amp;snb=69&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_ICT_HH_IND%40DF_IND&amp;df%5Bag%5D=OECD.STI.DEP&amp;df%5Bvs%5D=1.1&amp;dq=DEU%2BFRA%2BUSA.A........&amp;pd=2021,2025&amp;to%5BTIME_PERIOD%5D=false">OECD ICT Access and Usage by Individuals (pre-filtered)</a> (Accessed: 16.06.2026)</p>
+<p><strong>Licence:</strong> OECD Terms &amp; Conditions (Data – Section 3) “…you can extract from, download, copy, adapt, print, distribute, share and embed Data for any purpose, even for commercial use. You must give appropriate credit to the OECD…” Citation format: OECD (year), (dataset name),(data source) DOI or URL (accessed on (date)).</p>
 <p><strong>Description:</strong> The dataset contains information on ICT (information and communication technologies) usage among individuals across multiple indicators, such as age, sex, education level, income group, and purpose of ICT use.</p>
-<p>It is important to note that a pre-filtered version of the dataset will be used in the following analysis to reduce storage size (the full dataset is over 500MB) and to focus on the indicators required for the research questions. The applied filters will be documented in the data cleaning script located in <code>data/processed</code> and can be reproduced using the official OECD Data Explorer (link above).</p>
-<p>For this proposal, the following filters will be applied:</p>
+<p>It is important to note that a pre-filtered version of the dataset will be used in the following analysis to reduce storage size (the full dataset is over 500MB).</p>
+<p>The following filters will be applied:</p>
 <ul>
 <li><p>Time period: 2021–2025</p></li>
 <li><p>Reference areas: Germany, United States, France</p></li>
-<li><p>Unit of measure: Percentage of population</p></li>
-<li><p>Age groups: 16–24, 25–54, 55–74</p></li>
-<li><p>Education level: Low, medium, and high educational attainment</p></li>
 </ul>
-<p>This pre-filtered dataset contains 42 columns and 4,330 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population.</p>
+<p>This pre-filtered dataset contains 42 columns and 19010 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population or a count of people. It can be found in <code>data/raw</code> and is called: <code>ICT_data_raw.csv</code>.</p>
 <p><strong>Research Questions</strong></p>
 <ol type="1">
 <li><p>Does education level influence the proportion of the population across different countries and age groups that use the internet daily or almost every day within the last quarter of the year? (From 2021-2025)</p>
-<p>Needed columns: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA</p>
-<p>This question is explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.</p></li>
-<li></li>
-<li></li>
+<p>Needed columns: <code>AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE, REF_AREA</code></p></li>
+<li><p>How did the proportion of the population that uses the internet daily or almost every day change in the last few years in different countries and does the change correlate with the employment status or income group? (From 2021-2025)</p>
+<p>Needed columns: <code>OBS_VALUE, MEASURE, INCOME_GROUP, EMP_STATUS, TIME_PERIOD, REF_AREA</code></p></li>
 </ol>
+<p>Both questions are explanatory but not causal. A possible correlation could be driven by other factors, such as income differences across education levels resulting in differing access to some technologies.</p>
 </section>
 <section id="context-and-target-audience" class="level2">
 <h2 class="anchored" data-anchor-id="context-and-target-audience"><strong>Context and target audience</strong></h2>
@@ -231,26 +198,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="initial-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="initial-data-analysis"><strong>Initial data analysis</strong></h2>
+<p><strong>glimpse()</strong></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 4,330
+<pre><code>Rows: 19,010
 Columns: 42
 $ STRUCTURE                  &lt;chr&gt; "DATAFLOW", "DATAFLOW", "DATAFLOW", "DATAFL…
 $ STRUCTURE_ID               &lt;chr&gt; "OECD.STI.DEP:DSD_ICT_HH_IND@DF_IND(1.1)", …
 $ STRUCTURE_NAME             &lt;chr&gt; "ICT Access and Usage by Individuals", "ICT…
 $ ACTION                     &lt;chr&gt; "I", "I", "I", "I", "I", "I", "I", "I", "I"…
-$ REF_AREA                   &lt;chr&gt; "DEU", "DEU", "DEU", "DEU", "DEU", "DEU", "…
-$ `Reference area`           &lt;chr&gt; "Germany", "Germany", "Germany", "Germany",…
+$ REF_AREA                   &lt;chr&gt; "FRA", "FRA", "FRA", "FRA", "FRA", "FRA", "…
+$ `Reference area`           &lt;chr&gt; "France", "France", "France", "France", "Fr…
 $ FREQ                       &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A", "A", "A"…
 $ `Frequency of observation` &lt;chr&gt; "Annual", "Annual", "Annual", "Annual", "An…
-$ MEASURE                    &lt;chr&gt; "D1U_I", "D1B_I", "C5B1_I", "G1_I", "D1T_I"…
-$ Measure                    &lt;chr&gt; "Individuals using the internet for selling…
+$ MEASURE                    &lt;chr&gt; "D1A_I", "F4G_I", "G2I_I", "F2A_I", "G2G_I"…
+$ Measure                    &lt;chr&gt; "Individuals using the internet for e-maili…
 $ UNIT_MEASURE               &lt;chr&gt; "PT_POP", "PT_POP", "PT_POP", "PT_POP", "PT…
 $ `Unit of measure`          &lt;chr&gt; "Percentage of population", "Percentage of …
 $ GEO_AREA                   &lt;chr&gt; "_Z", "_Z", "_Z", "_Z", "_Z", "_Z", "_Z", "…
 $ `Geographical area`        &lt;chr&gt; "Not applicable", "Not applicable", "Not ap…
-$ AGE                        &lt;chr&gt; "Y16T24", "Y16T24", "Y16T24", "Y16T24", "Y1…
-$ Age                        &lt;chr&gt; "From 16 to 24 years", "From 16 to 24 years…
+$ AGE                        &lt;chr&gt; "Y16T74", "Y16T74", "Y16T74", "Y16T74", "Y1…
+$ Age                        &lt;chr&gt; "From 16 to 74 years", "From 16 to 74 years…
 $ SEX                        &lt;chr&gt; "_T", "_T", "_T", "_T", "_T", "_T", "_T", "…
 $ Sex                        &lt;chr&gt; "Total", "Total", "Total", "Total", "Total"…
 $ EDUCATION_LEVEL            &lt;chr&gt; "HI", "HI", "HI", "HI", "HI", "HI", "HI", "…
@@ -259,9 +227,9 @@ $ INCOME_GROUP               &lt;chr&gt; "_T", "_T", "_T", "_T", "_T", "_T", "_T
 $ `Income group`             &lt;chr&gt; "Total", "Total", "Total", "Total", "Total"…
 $ EMP_STATUS                 &lt;chr&gt; "_T", "_T", "_T", "_T", "_T", "_T", "_T", "…
 $ `Employment status`        &lt;chr&gt; "Total", "Total", "Total", "Total", "Total"…
-$ TIME_PERIOD                &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2…
+$ TIME_PERIOD                &lt;dbl&gt; 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2…
 $ `Time period`              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-$ OBS_VALUE                  &lt;dbl&gt; 21.8518, 79.2020, 98.6700, 99.2543, 84.4278…
+$ OBS_VALUE                  &lt;dbl&gt; 95.8430, 1.8295, 10.3323, 76.2974, 18.3431,…
 $ `Observation value`        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 $ OBS_STATUS                 &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A", "A", "A"…
 $ `Observation status`       &lt;chr&gt; "Normal value", "Normal value", "Normal val…
@@ -275,83 +243,90 @@ $ TIME_HORIZON_USE           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
 $ `Time horizon`             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 $ DECIMALS                   &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2…
 $ Decimals                   &lt;chr&gt; "Two", "Two", "Two", "Two", "Two", "Two", "…
-$ BREAKDOWN_V7_HH            &lt;chr&gt; "Y16_24HI", "Y16_24HI", "Y16_24HI", "Y16_24…
-$ `V7 Breakdowns households` &lt;chr&gt; "Individuals aged 16-24 with a high level o…</code></pre>
+$ BREAKDOWN_V7_HH            &lt;chr&gt; "I_HI", "I_HI", "I_HI", "I_HI", "I_HI", "I_…
+$ `V7 Breakdowns households` &lt;chr&gt; "Individuals aged 16-74 with a high level o…</code></pre>
 </div>
 </div>
+<p><strong>summary() - of key variables</strong></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA) <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>     AGE            EDUCATION_LEVEL     TIME_PERIOD     OBS_VALUE      
- Length:4330        Length:4330        Min.   :2021   Min.   :  0.000  
- Class :character   Class :character   1st Qu.:2021   1st Qu.:  9.669  
- Mode  :character   Mode  :character   Median :2023   Median : 28.495  
-                                       Mean   :2023   Mean   : 36.909  
-                                       3rd Qu.:2024   3rd Qu.: 62.133  
-                                       Max.   :2025   Max.   :100.000  
-   Measure            REF_AREA        
- Length:4330        Length:4330       
- Class :character   Class :character  
- Mode  :character   Mode  :character  
-                                      
-                                      
-                                      </code></pre>
+<pre><code>     AGE            EDUCATION_LEVEL     TIME_PERIOD     OBS_VALUE        
+ Length:19010       Length:19010       Min.   :2021   Min.   :        0  
+ Class :character   Class :character   1st Qu.:2021   1st Qu.:       10  
+ Mode  :character   Mode  :character   Median :2023   Median :       30  
+                                       Mean   :2023   Mean   :   180110  
+                                       3rd Qu.:2024   3rd Qu.:       60  
+                                       Max.   :2025   Max.   :243380968  
+   MEASURE            REF_AREA         INCOME_GROUP        EMP_STATUS       
+ Length:19010       Length:19010       Length:19010       Length:19010      
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            </code></pre>
+</div>
+</div>
+<p><strong>map(unique) - unique values of categorical variables</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$AGE
+[1] "Y16T74" "Y55T74" "Y16T24" "Y25T54" "Y_GE75"
+
+$EDUCATION_LEVEL
+[1] "HI" "_T" "ME" "LO"
+
+$TIME_PERIOD
+[1] 2023 2025 2024 2021 2022
+
+$MEASURE
+ [1] "D1A_I"    "F4G_I"    "G2I_I"    "F2A_I"    "G2G_I"    "H1C_I"   
+ [7] "C5B1_I"   "D1T_I"    "H1K_I"    "G2H3_I"   "C5B_I"    "F4F_I"   
+[13] "C5A_I"    "F4A_I"    "G2J_I"    "G2H1_I"   "I7B_I"    "H1I_I"   
+[19] "G2N2_I"   "F2_I"     "G2A1_I"   "G2H2_I"   "I7A_I"    "F2B_I"   
+[25] "I7C_I"    "G2M_I"    "G2H4_I"   "D1H_I"    "G2N1_I"   "G1_I"    
+[31] "G2C_I"    "D1O_I"    "D1M_I"    "I9_I"     "F1_I"     "G2A2_I"  
+[37] "H1A_I"    "F2C_I"    "D1U_I"    "G2DBIS_I" "G2B_I"    "F4J_I"   
+[43] "I7D_I"    "D1G_I"    "H1H_I"    "H1G_I"    "F1A_I"    "H1D_I"   
+[49] "F1B_I"    "D1B_I"    "D1E_I"    "I8_I"     "D1F_I"    "G2B1_I"  
+[55] "F4I_I"    "D1X_I"    "D1J1_I"   "D1J2_I"   "F4B_I"    "F1C_I"   
+[61] "IND_I"    "G2K1_I"   "G2K2_I"   "C2B_I"    "D1R_I"    "C6E_I"   
+
+$REF_AREA
+[1] "FRA" "DEU" "USA"
+
+$INCOME_GROUP
+[1] "_T"       "IND_QNT4" "IND_QNT1" "IND_QNT2" "IND_QNT3" "IND_QNT5"
+
+$EMP_STATUS
+[1] "_T"           "SAL_SELF_FAM" "RETIR_OTHER"  "STUD"         "UNE"         </code></pre>
 </div>
 </div>
 <p><strong>Plot 1 — Distribution of the outcome variable:</strong></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> OBS_VALUE)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of OBS_VALUE (percentage of the population for each indicator combination)"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"OBS_VALUE (%)"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="proposal_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="images/eda_plot_1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Plot 2 — Relationship or trend relevant to a research question:</strong></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MEASURE <span class="sc">==</span> <span class="st">"C5A_I"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Education level</span><span class="st">`</span>, <span class="at">y =</span> OBS_VALUE)) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relationship between education level and internet usage"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Education level"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Population share (%)"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="proposal_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="images/eda_plot_2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Data quality issues:</strong></p>
 <ul>
-<li><p>We may need multiple differently pre-filtered versions of the original dataset, as some indicators rule each other out during filtering. This may be due to missing observations for certain combinations of indicators. For example, education level and employment status rule each other out.</p></li>
+<li><p>Some indicators rule each other out. This may be due to missing observations for certain combinations of indicators. For example, education level and employment status rule each other out.</p></li>
 <li><p>As a result, questions such as “How does education level influence employment status…” are not answerable with this dataset due to the absence of observations containing both indicators.</p></li>
 <li><p>There are also many useless columns. Some contain the same information in different formats, while others are entirely filled with NA values.</p></li>
-<li><p>The documentation is lackluster. The only documented indicator is MEASURE/ Measure. The remaining indicators are fortunately mostly self-explanatory or not needed for the analysis, but it is still important to note the lack of documentation.</p></li>
+<li><p>The documentation is lackluster. The only documented indicator is <code>MEASURE/ Measure</code>. The remaining indicators are fortunately mostly self-explanatory or not needed for the analysis, but it is still important to note the lack of documentation.</p></li>
 </ul>
 </section>
 <section id="analysis-plan" class="level2">
@@ -359,11 +334,13 @@ $ `V7 Breakdowns households` &lt;chr&gt; "Individuals aged 16-24 with a high lev
 <ul>
 <li><p><em>Which variables will you use?</em></p>
 <ul>
-<li>Question 1: AGE, EDUCATION_LEVEL, TIME_PERIOD, OBS_VALUE, Measure, REF_AREA</li>
+<li><strong>Research Question 1:</strong> <code>AGE, EDUCATION_LEVEL, OBS_VALUE, MEASURE</code></li>
+<li><strong>Research Question 2:</strong> <code>OBS_VALUE, MEASURE, INCOME_GROUP, EMP_STATUS, TIME_PERIOD, REF_AREA</code></li>
 </ul></li>
 <li><p><em>What analytical approach or method seems appropriate, and why?</em></p>
 <ul>
-<li>Question 1: First of all, we would use a boxplot to get a first insight into the relationship between education level and daily or almost daily internet usage. Using faceted plots, we are able to compare these results across different countries and age groups. Then, a linear model could be used to further examine the impact of age, education level, and country.</li>
+<li><strong>Research Question 1:</strong> First of all, we would use a boxplot to get a first insight into the relationship between education level and daily or almost daily internet usage. Using faceted plots, we are able to compare these results across different countries and age groups. Then, a linear model could be used to further examine the impact of age, education level, and country.</li>
+<li><strong>Research Question 2:</strong> To start, we draw a line that shows the mean of the internet usage over time. Then we would draw a box plot to look how the proportion of the population that uses the internet daily or almost every day changed over the last years in different countries. Afterwards we can use faceted plots to see if there have been changes in other variables (employment status or income group) that affected the curve.</li>
 </ul></li>
 <li><p><em>What cleaning or transformation steps do you anticipate needing?</em></p>
 <p>Categorical variables need to be declared as such during import. Columns that contain the same information in different formats can be removed. Columns that are not needed for the analysis can be dropped.</p></li>
@@ -374,14 +351,14 @@ $ `V7 Breakdowns households` &lt;chr&gt; "Individuals aged 16-24 with a high lev
 <section id="workflow-organisation" class="level2">
 <h2 class="anchored" data-anchor-id="workflow-organisation"><strong>Workflow organisation</strong></h2>
 <ul>
-<li><p><em>Code style:</em> We will follow the coding style taught in StatProg1 and StatProg2, including the use of the tidyverse style with piping (%&gt;%), the here package for file paths, and other conventions. We will enforce this using a code_style.md file, which documents used packages and coding style conventions.</p></li>
-<li><p><em>Packages:</em> tidyverse, janitor, here, …</p></li>
-<li><p><em>Git workflow:</em> There will always be at least two branches to avoid conflicts within the group. This, together with a clear separation of tasks, should help to prevent merge conflicts. We will also work on separate .qmd files, which will later be combined into a final document using the include command for additional modularity.</p></li>
-<li><p><em><code>.gitignore</code>:</em>&nbsp;</p>
-<p>.Rhistory .RData .Rproj.user/</p>
-<p>/.quarto/ _site/</p>
-<p>.DS_Store Thumbs.db</p>
-<p>**/*.quarto_ipynb</p>
+<li><p><strong>Code style:</strong> We will follow the coding style taught in StatProg1 and StatProg2, including the use of the tidyverse style with piping <code>(%&gt;%)</code>, the here package for file paths, and other conventions. We will enforce this using a <code>code_style.md</code> file, which documents used packages and coding style conventions.</p></li>
+<li><p><strong>Packages:</strong> <code>tidyverse</code>, <code>janitor</code>, <code>here</code>, …</p></li>
+<li><p><strong>Git workflow:</strong> There will always be at least two branches to avoid conflicts within the group. This, together with a clear separation of tasks, should help to prevent merge conflicts. We will also work on separate <code>.qmd</code> files, which will later be combined into a final document using the include command for additional modularity.</p></li>
+<li><p><strong><code>.gitignore:</code></strong></p>
+<p><code>.Rhistory .RData .Rproj.user/</code></p>
+<p><code>/.quarto/ _site/</code></p>
+<p><code>.DS_Store Thumbs.db</code></p>
+<p><code>**/*.quarto_ipynb</code></p>
 <p>…</p></li>
 </ul>
 

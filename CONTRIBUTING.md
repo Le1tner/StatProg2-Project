@@ -24,7 +24,7 @@ Guidelines](https://docs.google.com/document/d/1mQ5YAWKDt9Ax4LvK-wuUzO5XfCI0e-ZG
 We used the following AI tools in this project:
 
 | Tool | Purpose | Scope |
-|------------------|----------------------------|--------------------------|
+|----|----|----|
 | Google Gemini | Debugging, git, text refinements | Throughout the whole project |
 
 **All AI-generated code and text was reviewed and verified by a group
