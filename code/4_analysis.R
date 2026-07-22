@@ -16,6 +16,7 @@ library(gt)
 library(broom)
 library(scales)
 library(ict.analysis.package)
+library(here)
 
 # **Dataset Preparation:**
 
@@ -90,12 +91,14 @@ data_lm$AGE <- relevel(factor(data_lm$AGE), ref = "Y25T54")
 linear_model = lm(OBS_VALUE ~ EDUCATION_LEVEL * AGE, data = data_lm)
 # summary(linear_model)
 
-make_table(
+table = make_table(
   linear_model, 
   "Linear regression results", 
   "Coefficient table", 
   "Source: OECD ICT Access and Usage by Individuals"
 )
+
+gtsave(table, here("images", "table.png"))
 
 # Instead of modelling `OBS_VALUE ~ EDUCATION_LEVEL + AGE`, we chose 
 # `OBS_VALUE ~ EDUCATION_LEVEL * AGE`. The interaction term allows the 
@@ -208,13 +211,15 @@ data_plot = data %>%
 #| internet use generally increases with education level in every age group, and 
 #| the differences between education levels become larger in older age groups."
 
-create_boxplot(
+boxplot = create_boxplot(
   data_plot, 
   "Education Level", 
   "Daily or almost daily internet use by education level across age groups", 
   "Daily internet use tends to increase with education level in all age groups,\nwith larger differences observed among older age groups.", 
   "AGE"
 )
+
+ggsave(here("images", "boxplot.png"), boxplot)
 
 # **Interpretation:**
 # The boxplots reflect the core findings of the model and visually 
