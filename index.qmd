@@ -10,16 +10,30 @@ date: today
 
 ## Introduction
 
-<!-- Motivate the dataset and research questions. -->
+In the modern digital era, consistent internet access has become a cornerstone of daily life, influencing professional opportunities, education, and social inclusion. Despite rapid technological expansion, digital divides persist across various demographic lines. Understanding these disparities is crucial for evaluating how socioeconomic factors shape digital participation and for fostering an inclusive digital society.
+
+This project investigates these patterns by leveraging the comprehensive **OECD ICT Access and Usage by Individuals** dataset, focusing on the years 2021 to 2025. Specifically, we explore how formal education levels and age groups interact to shape digital engagement. To operationalize this, our analysis is guided by the following core research question: ***Is education level associated with the proportion of the population that uses the internet daily or almost every day within different age groups?***
 
 ## Data
 
-<!-- Brief description of the dataset. -->
+**Description:** The dataset contains information on ICT (information and communication technologies) usage among individuals across multiple indicators, such as age, sex, education level, income group, and purpose of ICT use.
+
+**Correspondence table:** https://webfs-sti.oecd.org/files/.Stat/DSD_ICT_HH_IND/indicators_hh_ind.pdf
+
+**Note:** It is important to note that a pre-filtered version of the dataset will be used in the following analysis to reduce storage size (the full dataset is over 500MB). It is also important to mention that, even though the USA is included in the filter, there were no matching data points for our research question, so it is not included in this analysis.
+
+**The following filters will be applied:**
+
+Time period: 2021–2025
+
+Reference areas: Germany, United States, France
+
+This pre-filtered dataset contains 42 columns and 19010 rows. Each row represents a unique combination of multiple indicators, such as age and education level, and an observed value representing a part of the population or a count of people.
 
 ## Results
 
-<!-- Summary of key findings. -->
+Our analysis reveals that the relationship between education level and daily internet usage is heavily moderated by age. For young people (16–24 years), digital access is near-universal across all educational backgrounds. However, a clear educational gradient emerges among middle-aged adults (25–54 years), and this divide becomes most pronounced in the older demographic (55–74 years). Crucially, the model shows that higher education acts as a powerful buffer, offsetting more than half of the sharp age-related drop in daily internet use for older adults.
 
 ## Discussion
 
-<!-- Interpret results, limitations, and next steps. -->
+These findings are far from insignificant and highlight a persistent digital divide concentrated primarily among older populations, where education plays a vital bridging role. Because our model captures statistical associations rather than direct causal mechanisms—and faced limitations like structural data gaps—further investigation is needed. Future research should examine the underlying reasons for these age-specific gaps and explore how targeted digital literacy initiatives can help bridge them.

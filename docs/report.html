@@ -114,8 +114,19 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link active" data-scroll-target="#research-question"><strong>Research Question:</strong></a></li>
+  <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan"><strong>Analysis plan:</strong></a>
+  <ul class="collapse">
+  <li><a href="#coefficient-table" id="toc-coefficient-table" class="nav-link" data-scroll-target="#coefficient-table"><strong>Coefficient table:</strong></a></li>
+  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot"><strong>Box-Plot:</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
@@ -123,8 +134,67 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question"><strong>Research Question:</strong></h2>
+<p>Is education level associated with the proportion of the population that uses the internet daily or almost every day within different age groups?</p>
+</section>
+<section id="analysis-plan" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-plan"><strong>Analysis plan:</strong></h2>
+<p>We will regress <code>OBS_VALUE</code> (the share of the population using the internet daily or almost every day) on <code>EDUCATION_LEVEL</code>, <code>AGE</code>, and their interaction using linear regression. We will report a coefficient table with confidence intervals and a boxplot with <code>AGE</code> as facet. This addresses RQ1 because it quantifies the association between education level and daily internet use and assesses whether this association differs across age groups.</p>
+<section id="coefficient-table" class="level3">
+<h3 class="anchored" data-anchor-id="coefficient-table"><strong>Coefficient table:</strong></h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/table.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="how-to-read-this-table" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-read-this-table"><strong>How to read this table:</strong></h4>
+<p>In a linear regression model with interaction terms, the coefficients act as building blocks. To estimate the percentage of daily internet users for a specific group, you start at the baseline (Intercept) and add the relevant effects.</p>
+<p>The Baseline: Our reference group consists of individuals aged 25 to 54 with a Medium education level. In this group, an estimated 91.40 percent of the population use the internet daily or almost every day.</p>
+<p>Main Effects: These show the isolated effect of changing one variable. For example, moving from a Medium to a Low education level subtracts 11.70 percentage points.</p>
+<p>Interaction Effects: These represent the additional effect when changing both age group and education level simultaneously.</p>
+<p>Calculation Example: To estimate the proportion of daily internet users for individuals aged 55 to 74 with a Low education level: 91.40% - 11.70% - 20.66% - 5.29% = 53.75%</p>
+</section>
+<section id="interpretation" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation"><strong>Interpretation:</strong></h4>
+<p>The linear model reveals that the relationship between education level and daily internet usage is heavily moderated by age. Overall, three main takeaways can be observed:</p>
+<ol type="1">
+<li><p><strong>Baseline and Main Trends:</strong> Among middle-aged adults (25–54 years), lower education significantly decreases daily internet usage by 11.70 percentage points (p &lt; 0.001), while higher education increases it by 5.41 percentage points (p = 0.004). Older age (55–74 years) generally leads to a sharp decline in usage across all education levels (-20.66 percentage points, p &lt; 0.001), while younger age has a positive effect (+4.93 percentage points, p = 0.009). All of these main effects are statistically significant.</p></li>
+<li><p><strong>Education Promotes Daily Internet Usage Among Older Individuals:</strong> Higher education serves as a strong catalyst for daily or almost daily internet usage among older adults. The interaction term (<code>EDUCATION_LEVELHI:AGEY55T74</code>) is highly impactful and statistically significant (+11.53 percentage points, p &lt; 0.001), meaning that obtaining a high level of education eliminates more than half of the age-related drop in daily internet use. Conversely, low education further increases this gap (-5.29 percentage points, p = 0.046), although this effect is slightly less statistically significant.</p></li>
+<li><p><strong>Education Plays Little to No Role for Young People:</strong> For young people (16–24 years), formal education plays almost no role in daily internet access. While low education shows a positive interaction term (+9.19 percentage points, p &lt; 0.001) that neutralizes the main low-education penalty, the high-education interaction (EDUCATION_LEVELHI:AGEY16T24) is not statistically significant (p = 0.177). Therefore, compared to the reference group, having a high level of education provides no statistically provable difference in daily internet usage for young individuals.</p></li>
+</ol>
+</section>
+</section>
+<section id="box-plot" class="level3">
+<h3 class="anchored" data-anchor-id="box-plot"><strong>Box-Plot:</strong></h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/boxplot.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="interpretation-1" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-1"><strong>Interpretation:</strong></h4>
+<p>The boxplots reflect the core findings of the model and visually demonstrate how daily internet usage varies across education levels and age groups:</p>
+<ul>
+<li><p><strong>Youngest Age Group (16–24 years):</strong> Median daily internet usage is consistently high across all education levels, although a minor educational gradient is visible, with narrow boxes indicating very little variation between individuals.</p></li>
+<li><p><strong>Middle-Aged Adults (25–54 years):</strong> A clear educational gradient appears: median usage increases step-by-step from low to high education, with wider boxes for low and medium education, which then narrow significantly at the highest level.</p></li>
+<li><p><strong>Older Adults (55–74 years):</strong> This pattern is most pronounced in the oldest demographic, which exhibits the steepest educational gradient, the widest gap between low and high education, and the largest overall spread in the data (widest boxes).</p></li>
+</ul>
+<p>Overall, the plot confirms that higher education acts as a critical buffer against infrequent or non-existent daily internet usage in older age, whereas young individuals exhibit near-universal daily usage regardless of their educational background.</p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

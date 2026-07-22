@@ -1,0 +1,61 @@
+```{r}
+#| include: false
+library(tidyverse)
+library(here)
+```
+
+## **Research Question:** 
+
+Is education level associated with the proportion of the population that uses the internet daily or almost every day within different age groups?
+
+## **Analysis plan:** 
+
+We will regress `OBS_VALUE` (the share of the population using the internet daily or almost every day) on `EDUCATION_LEVEL`, `AGE`, and their interaction using linear regression. We will report a coefficient table with confidence intervals and a boxplot with `AGE` as facet. This addresses RQ1 because it quantifies the association between education level and daily internet use and assesses whether this association differs across age groups.
+
+### **Coefficient table:**
+
+```{r}
+#| echo: false
+knitr::include_graphics(here::here("images", "table.png"))
+```
+
+#### **How to read this table:**
+
+In a linear regression model with interaction terms, the coefficients act as building blocks. To estimate the percentage of daily internet users for a specific group, you start at the baseline (Intercept) and add the relevant effects.
+
+The Baseline: Our reference group consists of individuals aged 25 to 54 with a Medium education level. In this group, an estimated 91.40 percent of the population use the internet daily or almost every day.
+
+Main Effects: These show the isolated effect of changing one variable. For example, moving from a Medium to a Low education level subtracts 11.70 percentage points.
+
+Interaction Effects: These represent the additional effect when changing both age group and education level simultaneously.
+
+Calculation Example: To estimate the proportion of daily internet users for individuals aged 55 to 74 with a Low education level: 91.40% - 11.70% - 20.66% - 5.29% = 53.75%
+
+#### **Interpretation:**
+
+The linear model reveals that the relationship between education level and daily internet usage is heavily moderated by age. Overall, three main takeaways can be observed:
+
+1.  **Baseline and Main Trends:** Among middle-aged adults (25–54 years), lower education significantly decreases daily internet usage by 11.70 percentage points (p \< 0.001), while higher education increases it by 5.41 percentage points (p = 0.004). Older age (55–74 years) generally leads to a sharp decline in usage across all education levels (-20.66 percentage points, p \< 0.001), while younger age has a positive effect (+4.93 percentage points, p = 0.009). All of these main effects are statistically significant.
+
+2.  **Education Promotes Daily Internet Usage Among Older Individuals:** Higher education serves as a strong catalyst for daily or almost daily internet usage among older adults. The interaction term (`EDUCATION_LEVELHI:AGEY55T74`) is highly impactful and statistically significant (+11.53 percentage points, p \< 0.001), meaning that obtaining a high level of education eliminates more than half of the age-related drop in daily internet use. Conversely, low education further increases this gap (-5.29 percentage points, p = 0.046), although this effect is slightly less statistically significant.
+
+3.  **Education Plays Little to No Role for Young People:** For young people (16–24 years), formal education plays almost no role in daily internet access. While low education shows a positive interaction term (+9.19 percentage points, p \< 0.001) that neutralizes the main low-education penalty, the high-education interaction (EDUCATION_LEVELHI:AGEY16T24) is not statistically significant (p = 0.177). Therefore, compared to the reference group, having a high level of education provides no statistically provable difference in daily internet usage for young individuals.
+
+### **Box-Plot:**
+
+```{r}
+#| echo: false
+knitr::include_graphics(here::here("images", "boxplot.png"))
+```
+
+#### **Interpretation:**
+
+The boxplots reflect the core findings of the model and visually demonstrate how daily internet usage varies across education levels and age groups:
+
+-   **Youngest Age Group (16–24 years):** Median daily internet usage is consistently high across all education levels, although a minor educational gradient is visible, with narrow boxes indicating very little variation between individuals.
+
+-   **Middle-Aged Adults (25–54 years):** A clear educational gradient appears: median usage increases step-by-step from low to high education, with wider boxes for low and medium education, which then narrow significantly at the highest level.
+
+-   **Older Adults (55–74 years):** This pattern is most pronounced in the oldest demographic, which exhibits the steepest educational gradient, the widest gap between low and high education, and the largest overall spread in the data (widest boxes).
+
+Overall, the plot confirms that higher education acts as a critical buffer against infrequent or non-existent daily internet usage in older age, whereas young individuals exhibit near-universal daily usage regardless of their educational background.
