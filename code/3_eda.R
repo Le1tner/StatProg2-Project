@@ -52,5 +52,3 @@ plot_p2 = data %>%
   )
 plot_p2
 ggsave(here("docs", "eda_plot_2.png"), plot_p2)
-
-# Plot 3 — Relationship or trend relevant to a research question 2:
